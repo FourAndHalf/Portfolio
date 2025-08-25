@@ -1,3 +1,6 @@
+import { CheckCircle, Circle } from "lucide-react"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -81,6 +84,49 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+interface CardProgressbarProps extends React.ComponentProps<"div"> {
+  value: number
+  label?: string
+}
+
+function CardProgressbar({ value, label = "% Completed", className, ...props }: CardProgressbarProps) {
+  const clampedValue = Math.min(100, Math.max(0, value))
+  const remaining = 100 - clampedValue
+
+  return (
+    <div
+      data-slot="card-progress-bar"
+      className={cn("py-2 flex flex-col gap-2", className)}
+      {...props}
+    >
+
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className="w-[90%] h-4 flex rounded-md overflow-hidden cursor-pointer">
+              {/* Used portion */}
+              <div
+                className={cn(
+                  "h-full transition-all duration-500 ease-in-out bg-black dark:bg-white"
+                )}
+                style={{ width: `${clampedValue}%` }}
+              />
+              <div
+                className="h-full bg-muted"
+                style={{ width: `${remaining}%` }}
+              />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{clampedValue}% used, {remaining}% left</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      <p className="text-xs text-muted-foreground">{clampedValue}{label}</p>
+    </div>
+  )
+}
+
 export {
   Card,
   CardHeader,
@@ -89,4 +135,5 @@ export {
   CardAction,
   CardDescription,
   CardContent,
+  CardProgressbar
 }

@@ -89,19 +89,16 @@ export const sidebarItems: NavGroup[] = [
         title: "Requests",
         url: "/requests",
         icon: FileAxis3D,
-        comingSoon: true,
       },
       {
         title: "Approvals",
         url: "/approvals",
         icon: FileCheck,
-        comingSoon: true,
       },
       {
         title: "Documents",
         url: "/documents",
         icon: Files,
-        comingSoon: true,
       },
       {
         title: "Complaints",

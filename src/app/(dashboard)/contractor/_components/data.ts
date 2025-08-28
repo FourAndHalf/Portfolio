@@ -1,4 +1,4 @@
-[
+export const dataTable = [
     {
         "id": 1,
         "header": "Cover page",

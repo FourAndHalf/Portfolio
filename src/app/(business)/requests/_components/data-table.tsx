@@ -26,57 +26,60 @@ export function DataTable({ data: initialData }: { data: z.infer<typeof sectionS
   const table = useDataTableInstance({ data, columns, getRowId: (row) => row.id.toString() });
 
   return (
-    <Tabs defaultValue="milestones" className="w-full flex-col justify-start gap-6">
+    <Tabs defaultValue="orders" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between">
         <Label htmlFor="view-selector" className="sr-only">
           View
         </Label>
-        <Select defaultValue="milestones">
+        <Select defaultValue="orders">
           <SelectTrigger className="flex w-fit @4xl/main:hidden" size="sm" id="view-selector">
             <SelectValue placeholder="Select a view" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="milestones">Milestones</SelectItem>
-            <SelectItem value="workforce">Workforce</SelectItem>
-            <SelectItem value="ground-staffs">Ground Staffs</SelectItem>
-            <SelectItem value="inventory">Inventory</SelectItem>
+            <SelectItem value="orders">Orders</SelectItem>
+            <SelectItem value="frequent-orders">Frequent Orders</SelectItem>
+            <SelectItem value="personnel-request">Personnel Request</SelectItem>
+            <SelectItem value="documents-request">Documents Request</SelectItem>
           </SelectContent>
         </Select>
         <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
-          <TabsTrigger value="milestones">
-            Milestones
+          <TabsTrigger value="orders">
+            Orders
           </TabsTrigger>
-          <TabsTrigger value="workforce">
-            Workforce
+          <TabsTrigger value="frequent-orders">
+            Frequest Orders
           </TabsTrigger>
-          <TabsTrigger value="ground-staffs">
-            Ground Staffs
+          <TabsTrigger value="personnel-request">
+            Personnel Request <Badge variant="secondary">2</Badge>
           </TabsTrigger>
-          <TabsTrigger value="inventory">
-            Inventory <Badge variant="secondary">3</Badge>
+          <TabsTrigger value="documents-request">
+            Documents Request <Badge variant="secondary">2</Badge>
           </TabsTrigger>
         </TabsList>
         <div className="flex items-center gap-2">
           <DataTableViewOptions table={table} />
           <Button variant="outline" size="sm">
             <Plus />
-            <span className="hidden lg:inline">Add Section</span>
+            <span className="hidden lg:inline">Add Request</span>
           </Button>
         </div>
       </div>
-      <TabsContent value="milestones" className="relative flex flex-col gap-4 overflow-auto">
+      <TabsContent value="orders" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
           <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
         </div>
         <DataTablePagination table={table} />
       </TabsContent>
-      <TabsContent value="workforce" className="flex flex-col">
+      <TabsContent value="frequent-orders" className="relative flex flex-col gap-4 overflow-auto">
+        <div className="overflow-hidden rounded-lg border">
+          <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
+        </div>
+        <DataTablePagination table={table} />
+      </TabsContent>
+      <TabsContent value="personnel-request" className="flex flex-col">
         <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
       </TabsContent>
-      <TabsContent value="ground-staffs" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
-      </TabsContent>
-      <TabsContent value="inventory" className="flex flex-col">
+      <TabsContent value="documents-request" className="flex flex-col">
         <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
       </TabsContent>
     </Tabs>

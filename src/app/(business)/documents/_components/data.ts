@@ -1,4 +1,9 @@
-[
+export const headerData = {
+    "header": "Documents",
+    "subHeader": "Upload the documents related to the construction here for easier access"
+}
+
+export const tableData = [
     {
         "id": 1,
         "header": "Cover page",

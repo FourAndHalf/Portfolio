@@ -48,7 +48,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
   },
   {
     accessorKey: "header",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Milestone" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Header" />,
     cell: ({ row }) => {
       return <TableCellViewer item={row.original} />;
     },
@@ -56,7 +56,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
   },
   {
     accessorKey: "type",
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Importance" />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Section Type" />,
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -83,7 +83,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
   },
   {
     accessorKey: "target",
-    header: ({ column }) => <DataTableColumnHeader className="w-full text-right" column={column} title="Target Date" />,
+    header: ({ column }) => <DataTableColumnHeader className="w-full text-right" column={column} title="Target" />,
     cell: ({ row }) => (
       <form
         onSubmit={(e) => {
@@ -109,7 +109,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
   },
   {
     accessorKey: "limit",
-    header: ({ column }) => <DataTableColumnHeader className="w-full text-right" column={column} title="Completion Date" />,
+    header: ({ column }) => <DataTableColumnHeader className="w-full text-right" column={column} title="Limit" />,
     cell: ({ row }) => (
       <form
         onSubmit={(e) => {
@@ -157,8 +157,8 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
               <SelectValue placeholder="Assign reviewer" />
             </SelectTrigger>
             <SelectContent align="end">
-              <SelectItem value="Navneeth">Navneeth</SelectItem>
-              <SelectItem value="Sahin Hussein">Sahin Hussein</SelectItem>
+              <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
+              <SelectItem value="Jamik Tashpulatov">Jamik Tashpulatov</SelectItem>
             </SelectContent>
           </Select>
         </>

@@ -19,6 +19,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { toDateInputValue } from "@/lib/utils";
 
 import { sectionSchema } from "./schema";
 
@@ -112,31 +113,27 @@ export function TableCellViewer({ item }: { item: z.infer<typeof sectionSchema> 
           )}
           <form className="flex flex-col gap-4">
             <div className="flex flex-col gap-3">
-              <Label htmlFor="header">Header</Label>
-              <Input id="header" defaultValue={item.header} />
+              <Label htmlFor="milestones">Milestones</Label>
+              <Input id="milestones" defaultValue={item.header} />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
                 <Label htmlFor="type">Type</Label>
-                <Select defaultValue={item.type}>
+                <Select defaultValue={item.type ?? undefined}>
                   <SelectTrigger id="type" className="w-full">
                     <SelectValue placeholder="Select a type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Table of Contents">Table of Contents</SelectItem>
-                    <SelectItem value="Executive Summary">Executive Summary</SelectItem>
-                    <SelectItem value="Technical Approach">Technical Approach</SelectItem>
-                    <SelectItem value="Design">Design</SelectItem>
-                    <SelectItem value="Capabilities">Capabilities</SelectItem>
-                    <SelectItem value="Focus Documents">Focus Documents</SelectItem>
-                    <SelectItem value="Narrative">Narrative</SelectItem>
-                    <SelectItem value="Cover Page">Cover Page</SelectItem>
+                    <SelectItem value="crucial">Crucial</SelectItem>
+                    <SelectItem value="important">Important</SelectItem>
+                    <SelectItem value="good-to-have">Good to have</SelectItem>
+                    <SelectItem value="unimportant">Unimportant</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="flex flex-col gap-3">
                 <Label htmlFor="status">Status</Label>
-                <Select defaultValue={item.status}>
+                <Select defaultValue={item.status ?? undefined}>
                   <SelectTrigger id="status" className="w-full">
                     <SelectValue placeholder="Select a status" />
                   </SelectTrigger>
@@ -150,24 +147,24 @@ export function TableCellViewer({ item }: { item: z.infer<typeof sectionSchema> 
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-3">
-                <Label htmlFor="target">Target</Label>
-                <Input id="target" defaultValue={item.target} />
+                <Label htmlFor="targetdate">Target Date</Label>
+                <Input id="targetdate" defaultValue={item.targetdate ? toDateInputValue(item.targetdate) : ""} />
               </div>
               <div className="flex flex-col gap-3">
-                <Label htmlFor="limit">Limit</Label>
-                <Input id="limit" defaultValue={item.limit} />
+                <Label htmlFor="completiondate">Completion Date</Label>
+                <Input id="completiondate" defaultValue={item.completiondate ? toDateInputValue(item.completiondate) : ""} />
               </div>
             </div>
             <div className="flex flex-col gap-3">
               <Label htmlFor="reviewer">Reviewer</Label>
-              <Select defaultValue={item.reviewer}>
+              <Select defaultValue={item.reviewer ?? undefined}>
                 <SelectTrigger id="reviewer" className="w-full">
                   <SelectValue placeholder="Select a reviewer" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
-                  <SelectItem value="Jamik Tashpulatov">Jamik Tashpulatov</SelectItem>
-                  <SelectItem value="Emily Whalen">Emily Whalen</SelectItem>
+                  <SelectItem value="Navneeth">Navneeth</SelectItem>
+                  <SelectItem value="Sahin Hussein">Sahin Hussien</SelectItem>
+                  <SelectItem value="Ronson Menezes">Ronson Menezes</SelectItem>
                 </SelectContent>
               </Select>
             </div>

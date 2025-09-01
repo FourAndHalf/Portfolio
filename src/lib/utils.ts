@@ -40,3 +40,13 @@ export function formatCurrency(
 
   return new Intl.NumberFormat(locale, formatOptions).format(amount);
 }
+
+export const toDateInputValue = (d?: Date | null) =>
+  d ? d.toISOString().slice(0, 10) : "";
+
+export const toDisplayDate = (d?: Date | null) => {
+  if (!d) return "";
+  return new Intl.DateTimeFormat("en-GB").format(d);
+};
+
+export const fromDateInputValue = (v: string) => (v ? new Date(`${v}T00:00:00`) : undefined)

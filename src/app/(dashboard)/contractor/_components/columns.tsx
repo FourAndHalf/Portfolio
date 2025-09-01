@@ -18,9 +18,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
+import { toDateInputValue, fromDateInputValue } from "@/lib/utils";
 
 import { sectionSchema } from "./schema";
 import { TableCellViewer } from "./table-cell-viewer";
+import React from "react";
 
 export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
   {
@@ -58,7 +60,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
     accessorKey: "type",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Importance" />,
     cell: ({ row }) => (
-      <div className="w-32">
+      <div className="w-16">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
           {row.original.type}
         </Badge>
@@ -70,69 +72,150 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
     accessorKey: "status",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     cell: ({ row }) => (
-      <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.status === "Done" ? (
-          <CircleCheck className="stroke-border fill-green-500 dark:fill-green-400" />
-        ) : (
-          <Loader />
-        )}
-        {row.original.status}
-      </Badge>
+      <div className="w-16">
+        <Badge variant="outline" className="text-muted-foreground px-1.5">
+          {row.original.status === "Done" ? (
+            <CircleCheck className="stroke-border fill-green-500 dark:fill-green-400" />
+          ) : (
+            <Loader />
+          )}
+          {row.original.status}
+        </Badge>
+      </div>
     ),
     enableSorting: false,
   },
   {
-    accessorKey: "target",
-    header: ({ column }) => <DataTableColumnHeader className="w-full text-right" column={column} title="Target Date" />,
-    cell: ({ row }) => (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Saving ${row.original.header}`,
-            success: "Done",
-            error: "Error",
-          });
-        }}
-      >
-        <Label htmlFor={`${row.original.id}-target`} className="sr-only">
-          Target
-        </Label>
-        <Input
-          className="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-16 border-transparent bg-transparent text-right shadow-none focus-visible:border dark:bg-transparent"
-          defaultValue={row.original.target}
-          id={`${row.original.id}-target`}
-        />
-      </form>
+    accessorKey: "targetdate",
+    header: ({ column }) => (
+      <div className="w-16 justify-start">
+        <DataTableColumnHeader column={column} title="Target Date" />
+      </div>
     ),
+    cell: ({ row, table }) => {
+      const [value, setValue] = React.useState(
+        row.original.targetdate ? toDateInputValue(row.original.targetdate) : ""
+      );
+      const [editing, setEditing] = React.useState(false);
+
+      const save = async () => {
+        setEditing(false);
+        const current = toDateInputValue(row.original.targetdate);
+        if (value === current) return;
+
+        const p =
+          table.options.meta?.updateDate?.(
+            row.original.id,
+            "targetdate",
+            fromDateInputValue(value)
+          ) ?? new Promise((r) => setTimeout(r, 800));
+
+        await toast.promise(p, {
+          loading: `Saving ${row.original.header}`,
+          success: "Saved",
+          error: "Error",
+        });
+      };
+
+      return (
+        <div className="w-16 justify-start">
+          {editing ? (
+            <Input
+              id={`${row.id}-targetdate`}
+              type="date"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onBlur={save}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  (e.currentTarget as HTMLInputElement).blur();
+                }
+              }}
+              className="w-40 bg-transparent px-2 pr-8 py-1 text-sm tabular-nums rounded-md border border-border focus:border-border focus:outline-none text-left"
+              autoFocus
+            />
+          ) : (
+            <div
+              className="w-40 px-2 py-1 text-sm tabular-nums rounded-md border border-transparent hover:border-border cursor-pointer"
+              onClick={() => setEditing(true)}
+            >
+              {row.original.targetdate
+                ? new Intl.DateTimeFormat("en-GB").format(new Date(row.original.targetdate))
+                : ""}
+            </div>
+          )}
+        </div>
+      );
+    },
     enableSorting: false,
   },
   {
-    accessorKey: "limit",
-    header: ({ column }) => <DataTableColumnHeader className="w-full text-right" column={column} title="Completion Date" />,
-    cell: ({ row }) => (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Saving ${row.original.header}`,
-            success: "Done",
-            error: "Error",
-          });
-        }}
-      >
-        <Label htmlFor={`${row.original.id}-limit`} className="sr-only">
-          Limit
-        </Label>
-        <Input
-          className="hover:bg-input/30 focus-visible:bg-background dark:hover:bg-input/30 dark:focus-visible:bg-input/30 h-8 w-16 border-transparent bg-transparent text-right shadow-none focus-visible:border dark:bg-transparent"
-          defaultValue={row.original.limit}
-          id={`${row.original.id}-limit`}
-        />
-      </form>
+    accessorKey: "completiondate",
+    header: ({ column }) => (
+      <div className="w-16 justify-start">
+        <DataTableColumnHeader column={column} title="Completion Date" />
+      </div>
     ),
+    cell: ({ row, table }) => {
+      const [value, setValue] = React.useState(
+        row.original.completiondate ? toDateInputValue(row.original.completiondate) : ""
+      );
+      const [editing, setEditing] = React.useState(false);
+
+      const save = async () => {
+        setEditing(false);
+        const current = row.original.completiondate
+          ? toDateInputValue(row.original.completiondate)
+          : "";
+        if (value === current) return;
+
+        const p =
+          table.options.meta?.updateDate?.(
+            row.original.id,
+            "completiondate",
+            value ? fromDateInputValue(value) : undefined
+          ) ?? new Promise((r) => setTimeout(r, 800));
+
+        await toast.promise(p, {
+          loading: `Saving ${row.original.header}`,
+          success: "Saved",
+          error: "Error",
+        });
+      };
+
+      return (
+        <div className="w-16 justify-start">
+          {editing ? (
+            <Input
+              id={`${row.id}-completiondate`}
+              type="date"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onBlur={save}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  (e.currentTarget as HTMLInputElement).blur();
+                }
+              }}
+              className="w-40 bg-transparent px-2 pr-8 py-1 text-sm tabular-nums rounded-md border border-border focus:border-border focus:outline-none text-left"
+              autoFocus
+            />
+          ) : (
+            <div
+              className="w-40 px-2 py-1 text-sm tabular-nums rounded-md border border-transparent hover:border-border cursor-pointer min-h-[32px] flex items-center"
+              onClick={() => setEditing(true)}
+            >
+              {row.original.completiondate
+                ? new Intl.DateTimeFormat("en-GB").format(new Date(row.original.completiondate))
+                : ""}
+            </div>
+          )}
+        </div>
+      );
+    },
     enableSorting: false,
   },
+
   {
     accessorKey: "reviewer",
     header: ({ column }) => <DataTableColumnHeader column={column} title="Reviewer" />,
@@ -144,7 +227,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
       }
 
       return (
-        <>
+        <div className="w-32">
           <Label htmlFor={`${row.original.id}-reviewer`} className="sr-only">
             Reviewer
           </Label>
@@ -161,7 +244,7 @@ export const dashboardColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
               <SelectItem value="Sahin Hussein">Sahin Hussein</SelectItem>
             </SelectContent>
           </Select>
-        </>
+        </div>
       );
     },
     enableSorting: false,

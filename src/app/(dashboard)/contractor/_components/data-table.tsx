@@ -20,8 +20,14 @@ import { withDndColumn } from "@/components/data-table/table-utils";
 import { dashboardColumns } from "./columns";
 import { sectionSchema } from "./schema";
 
-export function DataTable({ data: initialData }: { data: z.infer<typeof sectionSchema>[] }) {
-  const [data, setData] = React.useState(() => initialData);
+export function DataTable({ data: initialData }: { data: any[] }) {
+  const [data, setData] = React.useState(() =>
+    initialData.map(item => ({
+      ...item,
+      targetdate: item.targetdate ? new Date(item.targetdate) : null,
+      completiondate: item.completiondate ? new Date(item.completiondate) : null,
+    }))
+  );
   const columns = withDndColumn(dashboardColumns);
   const table = useDataTableInstance({ data, columns, getRowId: (row) => row.id.toString() });
 

@@ -120,3 +120,6 @@
     @apply bg-background text-foreground;
   }
 }
+
+input[type="date"].no-date-placeholder:focus::-webkit-datetime-edit,
+input[type="date"].no-date-placeholder.has-value::-webkit-datetime-edit { color: inherit; }

@@ -17,10 +17,11 @@ import { DataTablePagination } from "@/components/data-table/data-table-paginati
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options";
 import { withDndColumn } from "@/components/data-table/table-utils";
 
-import { dashboardColumns } from "./columns";
+import { milestoneColumns, workforceColumns, groundStaffsColumns, inventoryColumns } from "./columns";
 import { sectionSchema } from "./schema";
 
 export function DataTable({ data: initialData }: { data: any[] }) {
+  const [activeTab, setActiveTab] = React.useState('milestones');
   const [data, setData] = React.useState(() =>
     initialData.map(item => ({
       ...item,
@@ -28,8 +29,21 @@ export function DataTable({ data: initialData }: { data: any[] }) {
       completiondate: item.completiondate ? new Date(item.completiondate) : null,
     }))
   );
-  const columns = withDndColumn(dashboardColumns);
-  const table = useDataTableInstance({ data, columns, getRowId: (row) => row.id.toString() });
+  const milestoneCols = withDndColumn(milestoneColumns);
+  const workforceCols = withDndColumn(workforceColumns);
+  const groundStaffsCols = withDndColumn(groundStaffsColumns);
+  const inventoryCols = withDndColumn(inventoryColumns);
+  const milestoneTable = useDataTableInstance({ data, columns: milestoneCols, getRowId: (row) => row.id.toString() });
+  const workforceTable = useDataTableInstance({ data, columns: workforceCols, getRowId: (row) => row.id.toString() });
+  const groundStaffsTable = useDataTableInstance({ data, columns: groundStaffsCols, getRowId: (row) => row.id.toString() });
+  const inventoryTable = useDataTableInstance({ data, columns: inventoryCols, getRowId: (row) => row.id.toString() });
+
+  const tables: Record<string, any> = {
+    milestones: milestoneTable,
+    workforce: workforceTable,
+    'ground-staffs': groundStaffsTable,
+    inventory: inventoryTable,
+  }
 
   return (
     <Tabs defaultValue="milestones" className="w-full flex-col justify-start gap-6">
@@ -63,27 +77,36 @@ export function DataTable({ data: initialData }: { data: any[] }) {
           </TabsTrigger>
         </TabsList>
         <div className="flex items-center gap-2">
-          <DataTableViewOptions table={table} />
-          <Button variant="outline" size="sm">
+          <DataTableViewOptions table={tables[activeTab]} />
+          {/* <Button variant="outline" size="sm">
             <Plus />
             <span className="hidden lg:inline">Add Section</span>
-          </Button>
+          </Button> */}
         </div>
       </div>
       <TabsContent value="milestones" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
-          <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
+          <DataTableNew dndEnabled table={milestoneTable} columns={milestoneCols} onReorder={setData} />
         </div>
-        <DataTablePagination table={table} />
+        <DataTablePagination table={milestoneTable} />
       </TabsContent>
-      <TabsContent value="workforce" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+      <TabsContent value="workforce" className="relative flex flex-col gap-4 overflow-auto">
+        <div className="overflow-hidden rounded-lg border">
+          <DataTableNew dndEnabled table={workforceTable} columns={workforceCols} />
+        </div>
+        <DataTablePagination table={workforceTable} />
       </TabsContent>
-      <TabsContent value="ground-staffs" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+      <TabsContent value="ground-staffs" className="relative flex flex-col gap-4 overflow-auto">
+        <div className="overflow-hidden rounded-lg border">
+          <DataTableNew dndEnabled table={groundStaffsTable} columns={groundStaffsCols} />
+        </div>
+        <DataTablePagination table={groundStaffsTable} />
       </TabsContent>
-      <TabsContent value="inventory" className="flex flex-col">
-        <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+      <TabsContent value="inventory" className="relative flex flex-col gap-4 overflow-auto">
+        <div className="overflow-hidden rounded-lg border">
+          <DataTableNew dndEnabled table={inventoryTable} columns={inventoryCols} />
+        </div>
+        <DataTablePagination table={inventoryTable} />
       </TabsContent>
     </Tabs>
   );

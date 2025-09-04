@@ -1,5 +1,5 @@
 import { Heading } from "@/features/business/components/heading";
-import { DataTable } from "./_components/data-table";
+// import { DataTable } from "./_components/data-table";
 import { headerData, cardData } from "./_components/data";
 import { DocumentCard } from "./_components/document-cards";
 

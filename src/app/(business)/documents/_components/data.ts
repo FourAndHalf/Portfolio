@@ -11,7 +11,7 @@ export const cardData: CardData[] = [
         title: "Professional License",
         expirableOrNot: true,
         expiryDate: new Date("2024-12-31"),
-        daysToExpiry: 45,
+        daysToExpiry: -35,
         authorizingBody: "State Medical Board"
     },
     {

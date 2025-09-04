@@ -314,7 +314,7 @@ export const workforceColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
     cell: ({ row }) => {
       return (
         <div className="w-32 justify-start">
-          <TableCellViewer item={row.original} />
+         <TableCellViewer item={row.original} />
         </div>
       );
     },

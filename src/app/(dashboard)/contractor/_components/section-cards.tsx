@@ -14,7 +14,7 @@ export function SectionCards() {
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Completion Percentage</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-5xl">46%</CardTitle>
+          <CardTitle className="text-2xl font-semibold p-2 tabular-nums @[250px]/card:text-5xl">46%</CardTitle>
           <CardAction>
             <Badge variant="outline">
               <TrendingUp />
@@ -32,7 +32,7 @@ export function SectionCards() {
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Workforce Deployment</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-5xl">1,350</CardTitle>
+          <CardTitle className="text-2xl font-semibold p-2 tabular-nums @[250px]/card:text-5xl">1,350</CardTitle>
           <CardAction>
             <Badge variant="outline">
               <TrendingUp />
@@ -107,32 +107,16 @@ export function SectionCards() {
           <div className="line-clamp-1 flex gap-2 font-medium">
             Spending Accelerated <TrendingUp className="size-4" />
           </div>
-          <div className="text-muted-foreground">Needs personal assistance</div>
+          <div className="text-muted-foreground">1 project above target v/s 2 below target</div>
         </CardFooter>
         {/* <CardFooter>
           <p className="text-muted-foreground text-xs">Average progress: 78% · 2 projects above target</p>
-        </CardFooter> */}
-        {/* <CardHeader>
-          <CardDescription>Budget Usage</CardDescription>
-          <CardProgressbar value={72} label="% utilised" />
-
-          <CardAction>
-            <Badge variant="outline">
-              <TrendingDown />
-              Underspending
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Spending Accelerated <TrendingUp className="size-4" />
-          </div>
         </CardFooter> */}
       </Card>
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Issues Reported</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-5xl">72</CardTitle>
+          <CardTitle className="text-2xl font-semibold p-2 tabular-nums @[250px]/card:text-5xl">72</CardTitle>
           <CardAction>
             <Badge variant="outline">
               <TrendingUp />

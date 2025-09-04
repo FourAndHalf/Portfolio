@@ -1,16 +1,6 @@
 import { z } from "zod";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const sectionSchema = z.object({
-  id: z.number(),
-  header: z.string(),
-  type: z.string(),
-  status: z.string(),
-  target: z.string(),
-  limit: z.string(),
-  reviewer: z.string(),
-});
-
 export const cardSchema = z.object({
   id: z.number(),
   title: z.string(),
@@ -23,6 +13,10 @@ export const cardSchema = z.object({
 export type CardData = z.infer<typeof cardSchema>;
 
 export const cardColumns: ColumnDef<CardData>[] = [
+  {
+    accessorKey: "id",
+    header: "Id",
+  },
   {
     accessorKey: "title",
     header: "Title",

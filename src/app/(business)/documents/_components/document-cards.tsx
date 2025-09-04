@@ -9,10 +9,26 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { CardViewOptions } from "@/components/card-section/card-view-options";
+import { CardView } from "@/components/card-section/card-view";
+import { CardItem } from "@/components/card-section/card-item";
 import { Button } from "@/components/ui/button";
+import { cardData } from "./data";
 
-export function DocumentCard({ data: initialData }: { data: CardData[] }) {
+export function DocumentCard({ data: initialData = cardData }: { data?: CardData[] }) {
     const [data, setData] = React.useState(() => initialData);
+    const [uploadedDocuments, setUploadedDocuments] = React.useState<Set<number>>(new Set());
+
+    const handleUpload = (id: number) => {
+        setUploadedDocuments(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(id)) {
+                newSet.delete(id);
+            } else {
+                newSet.add(id);
+            }
+            return newSet;
+        });
+    };
 
     return (
         <Tabs defaultValue="blueprint" className="w-full flex-col justify-start gap-6">
@@ -54,14 +70,37 @@ export function DocumentCard({ data: initialData }: { data: CardData[] }) {
                 </div>
             </div>
             <TabsContent value="blueprint" className="relative flex flex-col gap-4 overflow-auto">
-                <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+                <CardView
+                    data={data}
+                    columns={cardColumns}
+                    dndEnabled={true}
+                    onReorder={setData}
+                    getItemId={(item) => item.id}
+                    renderCard={(item, index) => (
+                        <CardItem
+                            data={item}
+                            index={index}
+                            hasDocument={uploadedDocuments.has(item.id)}
+                            onUpload={handleUpload}
+                        />
+                    )}
+                />
             </TabsContent>
             <TabsContent value="legal" className="relative flex flex-col gap-4 overflow-auto">
-                {/* <div className="overflow-hidden rounded-lg border">
-                    <DataTableNew dndEnabled table={table} columns={columns} onReorder={setData} />
-                </div>
-                <DataTablePagination table={table} /> */}
-                <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
+                <CardView
+                    data={data}
+                    columns={cardColumns}
+                    dndEnabled={true}
+                    onReorder={setData}
+                    renderCard={(item, index) => (
+                        <CardItem
+                            data={item}
+                            index={index}
+                            hasDocument={uploadedDocuments.has(item.id)}
+                            onUpload={handleUpload}
+                        />
+                    )}
+                />
             </TabsContent>
             <TabsContent value="authority" className="flex flex-col">
                 <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>

@@ -14,7 +14,7 @@ export function SectionCards() {
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Completion Percentage</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">46%</CardTitle>
+          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-5xl">46%</CardTitle>
           <CardAction>
             <Badge variant="outline">
               <TrendingUp />
@@ -32,7 +32,7 @@ export function SectionCards() {
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Workforce Deployment</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">1,350</CardTitle>
+          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-5xl">1,350</CardTitle>
           <CardAction>
             <Badge variant="outline">
               <TrendingUp />
@@ -132,7 +132,7 @@ export function SectionCards() {
       <Card className="@container/card">
         <CardHeader>
           <CardDescription>Issues Reported</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">72</CardTitle>
+          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-5xl">72</CardTitle>
           <CardAction>
             <Badge variant="outline">
               <TrendingUp />

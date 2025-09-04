@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  nextjs:
+    build: .
+    container_name: nextjs_app
+    restart: always
+    expose:
+      - "3000"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_reverse_proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./certbot:/etc/letsencrypt
+    depends_on:
+      - nextjs
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot_ssl
+    volumes:
+      - ./certbot:/etc/letsencrypt
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    entrypoint: >
+      sh -c "certbot --nginx -d sssyoutubespotifydownloader.co.in -d www.sssyoutubespotifydownloader.co.in --non-interactive --agree-tos -m jinsoneb@gmail.com"

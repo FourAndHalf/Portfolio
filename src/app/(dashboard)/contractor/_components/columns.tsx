@@ -3,6 +3,13 @@ import { CircleCheck, Loader, EllipsisVertical } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
+// Extend TableMeta to include updateDate method
+declare module "@tanstack/react-table" {
+  interface TableMeta<TData> {
+    updateDate?: (id: number, field: string, value: Date | undefined) => Promise<void>;
+  }
+}
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -307,7 +314,7 @@ export const workforceColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
     cell: ({ row }) => {
       return (
         <div className="w-32 justify-start">
-         <TableCellViewer item={row.original} />
+          <TableCellViewer item={row.original} />
         </div>
       );
     },
@@ -559,7 +566,7 @@ export const groundStaffsColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
     cell: ({ row }) => {
       return (
         <div className="w-32 justify-start">
-         <TableCellViewer item={row.original} />
+          <TableCellViewer item={row.original} />
         </div>
       );
     },
@@ -811,7 +818,7 @@ export const inventoryColumns: ColumnDef<z.infer<typeof sectionSchema>>[] = [
     cell: ({ row }) => {
       return (
         <div className="w-32 justify-start">
-         <TableCellViewer item={row.original} />
+          <TableCellViewer item={row.original} />
         </div>
       );
     },

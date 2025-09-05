@@ -13,47 +13,81 @@ import { CardView } from "@/components/card-section/card-view";
 import { CardItem } from "@/components/card-section/card-item";
 import { DocumentDialog, QuickDocumentDialog } from "@/app/(business)/documents/_components/document-dialog";
 import { Button } from "@/components/ui/button";
+import { useDocumentToast } from "@/components/sonner";
 import { cardData } from "./data";
 
 export function DocumentCard({ data: initialData = cardData }: { data?: CardData[] }) {
     const [data, setData] = React.useState(() => initialData);
     const [uploadedDocuments, setUploadedDocuments] = React.useState<Set<number>>(new Set());
+    const { handleUpload, handleSave } = useDocumentToast();
 
-    const handleUpload = (id: number) => {
-        setUploadedDocuments(prev => {
-            const newSet = new Set(prev);
-            if (newSet.has(id)) {
-                newSet.delete(id);
-            } else {
-                newSet.add(id);
-            }
-            return newSet;
+    const handleDocumentUpload = async (id: number) => {
+        const document = data.find(doc => doc.id === id);
+        if (!document) return;
+
+        // Simulate file upload
+        const mockFile = new File([`Content for ${document.title}`], `${document.title}.pdf`, {
+            type: 'application/pdf'
         });
+
+        try {
+            await handleUpload(mockFile, async (file) => {
+                // Simulate upload delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                console.log('Uploading file:', file.name);
+            });
+
+            // Mark as uploaded
+            setUploadedDocuments(prev => new Set(prev).add(id));
+        } catch (error) {
+            console.error('Upload failed:', error);
+        }
     };
 
     const handleAddDocument = async (documentData: Partial<CardData>) => {
-        // Generate new ID
-        const newId = Math.max(...data.map(d => d.id), 0) + 1;
-        const newDocument: CardData = {
-            id: newId,
-            title: documentData.title || "",
-            authorizingBody: documentData.authorizingBody || "",
-            expirableOrNot: documentData.expirableOrNot || false,
-            expiryDate: documentData.expiryDate || new Date(),
-            daysToExpiry: documentData.daysToExpiry || 0,
-        };
+        const documentTitle = documentData.title || "New Document";
 
-        setData(prev => [...prev, newDocument]);
+        try {
+            await handleSave(documentTitle, async () => {
+                // Generate new ID
+                const newId = Math.max(...data.map(d => d.id), 0) + 1;
+                const newDocument: CardData = {
+                    id: newId,
+                    title: documentData.title || "",
+                    authorizingBody: documentData.authorizingBody || "",
+                    expirableOrNot: documentData.expirableOrNot || false,
+                    expiryDate: documentData.expiryDate || new Date(),
+                    daysToExpiry: documentData.daysToExpiry || 0,
+                };
+
+                // Simulate save delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                setData(prev => [...prev, newDocument]);
+            });
+        } catch (error) {
+            console.error('Save failed:', error);
+        }
     };
 
     const handleEditDocument = async (documentData: Partial<CardData>) => {
         if (!documentData.id) return;
 
-        setData(prev => prev.map(doc =>
-            doc.id === documentData.id
-                ? { ...doc, ...documentData }
-                : doc
-        ));
+        const documentTitle = documentData.title || "Document";
+
+        try {
+            await handleSave(documentTitle, async () => {
+                // Simulate save delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                setData(prev => prev.map(doc =>
+                    doc.id === documentData.id
+                        ? { ...doc, ...documentData }
+                        : doc
+                ));
+            });
+        } catch (error) {
+            console.error('Save failed:', error);
+        }
     };
 
     return (
@@ -109,7 +143,7 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                             data={item}
                             index={index}
                             hasDocument={uploadedDocuments.has(item.id)}
-                            onUpload={handleUpload}
+                            onUpload={handleDocumentUpload}
                         />
                     )}
                 />
@@ -125,7 +159,7 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                             data={item}
                             index={index}
                             hasDocument={uploadedDocuments.has(item.id)}
-                            onUpload={handleUpload}
+                            onUpload={handleDocumentUpload}
                         />
                     )}
                 />

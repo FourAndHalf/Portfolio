@@ -91,7 +91,6 @@ export function CardView<TData>({
             const oldIndex = dataIds.indexOf(active.id);
             const newIndex = dataIds.indexOf(over.id);
 
-            // Call parent with new data order (parent manages state)
             const newData = arrayMove(data, oldIndex, newIndex);
             onReorder(newData);
         }

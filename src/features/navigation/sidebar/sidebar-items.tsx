@@ -20,6 +20,10 @@ import {
   FileAxis3D,
   Files,
   OctagonAlert,
+  Network,
+  MapPinned,
+  Pickaxe,
+  Users2,
 } from "lucide-react";
 
 export interface NavSubItem {
@@ -55,7 +59,24 @@ export const sidebarItems: NavGroup[] = [
       {
         title: "Contractor",
         url: "/contractor",
-        icon: LayoutDashboard,
+        icon: Network,
+      },
+      {
+        title: "Site Manager",
+        url: "/sitemanager",
+        icon: MapPinned,
+      },
+      {
+        title: "Supervisor",
+        url: "/supervisor",
+        icon: Users,
+        comingSoon: true,
+      },
+      {
+        title: "Worker",
+        url: "/worker",
+        icon: Pickaxe,
+        comingSoon: true,
       },
       {
         title: "CRM",
@@ -134,7 +155,6 @@ export const sidebarItems: NavGroup[] = [
         title: "Invoice",
         url: "/invoice",
         icon: ReceiptText,
-        comingSoon: true,
       },
       {
         title: "Users",

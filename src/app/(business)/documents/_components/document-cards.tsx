@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { CardViewOptions } from "@/components/card-section/card-view-options";
 import { CardView } from "@/components/card-section/card-view";
 import { CardItem } from "@/components/card-section/card-item";
+import { DocumentDialog, QuickDocumentDialog } from "@/app/(business)/documents/_components/document-dialog";
 import { Button } from "@/components/ui/button";
 import { cardData } from "./data";
 
@@ -30,6 +31,31 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
         });
     };
 
+    const handleAddDocument = async (documentData: Partial<CardData>) => {
+        // Generate new ID
+        const newId = Math.max(...data.map(d => d.id), 0) + 1;
+        const newDocument: CardData = {
+            id: newId,
+            title: documentData.title || "",
+            authorizingBody: documentData.authorizingBody || "",
+            expirableOrNot: documentData.expirableOrNot || false,
+            expiryDate: documentData.expiryDate || new Date(),
+            daysToExpiry: documentData.daysToExpiry || 0,
+        };
+
+        setData(prev => [...prev, newDocument]);
+    };
+
+    const handleEditDocument = async (documentData: Partial<CardData>) => {
+        if (!documentData.id) return;
+
+        setData(prev => prev.map(doc =>
+            doc.id === documentData.id
+                ? { ...doc, ...documentData }
+                : doc
+        ));
+    };
+
     return (
         <Tabs defaultValue="blueprint" className="w-full flex-col justify-start gap-6">
             <div className="flex items-center justify-between">
@@ -43,7 +69,7 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                     <SelectContent>
                         <SelectItem value="blueprint">Blueprint</SelectItem>
                         <SelectItem value="legal">Legal</SelectItem>
-                        <SelectItem value="authority">Authority Sanctions</SelectItem>
+                        <SelectItem value="sanctions">Sanctions</SelectItem>
                         <SelectItem value="contracts">Contracts</SelectItem>
                     </SelectContent>
                 </Select>
@@ -54,8 +80,8 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                     <TabsTrigger value="legal">
                         Legal
                     </TabsTrigger>
-                    <TabsTrigger value="authority">
-                        Authority Sanctions <Badge variant="secondary">2</Badge>
+                    <TabsTrigger value="sanctions">
+                        Sanctions <Badge variant="secondary">2</Badge>
                     </TabsTrigger>
                     <TabsTrigger value="contracts">
                         Contracts
@@ -63,10 +89,12 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                 </TabsList>
                 <div className="flex items-center gap-2">
                     <CardViewOptions data={data} columns={cardColumns} />
-                    <Button variant="outline" size="sm">
+                    {/* <Button variant="outline" size="sm">
                         <Plus />
-                        <span className="hidden lg:inline">Add Section</span>
-                    </Button>
+                        <span className="hidden lg:inline">Add Document</span>
+                    </Button>  */}
+                    <DocumentDialog onSubmit={handleAddDocument} />
+                    <QuickDocumentDialog onSubmit={handleAddDocument} />
                 </div>
             </div>
             <TabsContent value="blueprint" className="relative flex flex-col gap-4 overflow-auto">
@@ -102,7 +130,7 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                     )}
                 />
             </TabsContent>
-            <TabsContent value="authority" className="flex flex-col">
+            <TabsContent value="sanctions" className="flex flex-col">
                 <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
             </TabsContent>
             <TabsContent value="contracts" className="flex flex-col">

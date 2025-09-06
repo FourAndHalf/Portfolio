@@ -5,14 +5,14 @@ import { FileText, Trash2, TrendingUp, Upload } from "lucide-react";
 import { CardData } from "@/app/(business)/documents/_components/schema";
 import { toDateInputValue } from "@/lib/utils";
 
-interface CardItemProps {
+interface DocumentCardItemProps {
     data: CardData;
     index: number;
     hasDocument?: boolean;
     onUpload?: (id: number) => void;
 }
 
-export function CardItem({ data, index, hasDocument = false, onUpload }: CardItemProps) {
+export function DocumentCardItem({ data, index, hasDocument = false, onUpload }: DocumentCardItemProps) {
     const isExpiringSoon = data.daysToExpiry <= 30;
     const isExpired = data.daysToExpiry <= 0;
 

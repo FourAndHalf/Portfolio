@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { CardViewOptions } from "@/components/card-section/card-view-options";
 import { CardView } from "@/components/card-section/card-view";
-import { CardItem } from "@/components/card-section/card-item";
+import { DocumentCardItem } from "@/components/card-section/card-item";
 import { DocumentDialog, QuickDocumentDialog } from "@/app/(business)/documents/_components/document-dialog";
 import { Button } from "@/components/ui/button";
 import { useDocumentToast } from "@/components/sonner";
@@ -139,7 +139,7 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                     onReorder={setData}
                     getItemId={(item) => item.id}
                     renderCard={(item, index) => (
-                        <CardItem
+                        <DocumentCardItem
                             data={item}
                             index={index}
                             hasDocument={uploadedDocuments.has(item.id)}
@@ -155,7 +155,7 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                     dndEnabled={true}
                     onReorder={setData}
                     renderCard={(item, index) => (
-                        <CardItem
+                        <DocumentCardItem
                             data={item}
                             index={index}
                             hasDocument={uploadedDocuments.has(item.id)}

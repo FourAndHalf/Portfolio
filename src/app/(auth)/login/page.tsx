@@ -23,7 +23,7 @@ export default function Login() {
           <LoginForm />
           <div className="text-muted-foreground text-center text-sm">
             Don&apos;t have an account?{" "}
-            <Link className="text-foreground underline-offset-4 hover:underline" href="/auth/register">
+            <Link className="text-foreground underline-offset-4 hover:underline" href="register">
               Register
             </Link>
           </div>

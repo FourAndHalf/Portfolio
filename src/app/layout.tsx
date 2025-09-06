@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Workforce",
+  title: "Jinson E B",
   description: "Managing your commitments",
 };
 

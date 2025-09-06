@@ -9,10 +9,9 @@ export default function Home() {
   useEffect(() => {
     const alreadyLoggedIn = localStorage.getItem("LoggedIn");
     if (alreadyLoggedIn) {
-      router.push("/contractor");
+      router.push("/developer");
     } else {
-      router.push("/contractor");
-      // router.push("/auth/login");
+      router.push("/developer");
     }
   }, [router]);
 

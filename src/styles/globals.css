@@ -43,6 +43,11 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --color-desktop: var(--chart-1);
+  --color-mobile: var(--chart-2);
+  --color-eduzell: var(--chart-1);
+  --color-assuretech: var(--chart-2);
 }
 
 /* Default theme styles (used when no data-theme-preset is set or when 'default' is selected).

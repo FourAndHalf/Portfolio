@@ -23,7 +23,7 @@ export default function Register() {
           <RegisterForm />
           <div className="text-muted-foreground text-center text-sm">
             Already have an account?{" "}
-            <Link className="text-foreground underline-offset-4 hover:underline" href="/auth/login">
+            <Link className="text-foreground underline-offset-4 hover:underline" href="login">
               Login
             </Link>
           </div>

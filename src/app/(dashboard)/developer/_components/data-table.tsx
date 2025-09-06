@@ -22,6 +22,7 @@ import { sectionSchema } from "./schema";
 
 export function DataTable({ data: initialData }: { data: any[] }) {
   const [activeTab, setActiveTab] = React.useState('milestones');
+  const [revealed, setRevealed] = React.useState(false);
   const [data, setData] = React.useState(() =>
     initialData.map(item => ({
       ...item,
@@ -45,8 +46,19 @@ export function DataTable({ data: initialData }: { data: any[] }) {
     inventory: inventoryTable,
   }
 
+  const handleClick = () => {
+    if (window.innerWidth < 640) {
+      setRevealed((prev) => !prev);
+    }
+  };
+
   return (
-    <Tabs defaultValue="milestones" className="w-full flex-col justify-start gap-6">
+    <Tabs
+      defaultValue="milestones"
+      onClick={handleClick}
+      className={`w-full flex-col justify-start gap-6 transition-smooth duration-300 ${revealed ? "blur-none" : "blur-xs"
+        } sm:hover:blur-none`}
+    >
       <div className="flex items-center justify-between">
         <Label htmlFor="view-selector" className="sr-only">
           View

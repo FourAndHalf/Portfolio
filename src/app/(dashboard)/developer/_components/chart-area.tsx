@@ -12,11 +12,12 @@ import {
     experienceByCompanyChartConfig,
 } from "./developer.config";
 import { Separator } from "@/components/ui/separator";
-import { formatCurrency } from "@/lib/utils";
+import { useDeveloperToast } from "./use-toast";
 import { Ellipsis, ShoppingBasket, TramFront } from "lucide-react";
 
 export function InsightCards() {
     const lastMonth = format(subMonths(new Date(), 1), "LLLL");
+    const developerToast = useDeveloperToast();
 
     let totalExperience = experienceByCompanyChartData.reduce(
         (acc, curr) => acc + Number(curr.experience || 0),
@@ -24,24 +25,24 @@ export function InsightCards() {
     );
     const totalExpInYears = (totalExperience / 12).toFixed(1);
 
-    const chartData = [{ period: "last-week", groceries: 380, transport: 120, other: 80 }];
+    const chartData = [{ period: "last-week", production: 380, uat: 120, development: 80 }];
 
     const chartConfig = {
-        groceries: {
-            label: "Groceries",
+        production: {
+            label: "Production",
             color: "var(--chart-1)",
         },
-        transport: {
-            label: "Transport",
+        uat: {
+            label: "User Acceptance Testing",
             color: "var(--chart-2)",
         },
-        other: {
-            label: "Other",
+        development: {
+            label: "Under Development",
             color: "var(--chart-3)",
         },
     } satisfies ChartConfig;
 
-    const totalExpenses = chartData.length ? chartData[0].groceries + chartData[0].transport + chartData[0].other : 0;
+    const totalProjects = chartData.length ? chartData[0].production + chartData[0].uat + chartData[0].development : 0;
 
     return (
         <div className="grid grid-cols-1 gap-4 *:data-[slot=card]:shadow-xs sm:grid-cols-2 xl:grid-cols-7">
@@ -124,7 +125,8 @@ export function InsightCards() {
                 </CardContent>
 
                 <CardFooter className="flex flex-col sm:flex-row gap-2">
-                    <Button size="sm" variant="outline" className="w-full sm:w-1/2">
+                    <Button size="sm" variant="outline" 
+                        className="w-full sm:w-1/2">
                         View Full Experience
                     </Button>
                     <Button size="sm" variant="outline"
@@ -208,7 +210,7 @@ export function InsightCards() {
                                                             y={(viewBox.cy ?? 0) - 16}
                                                             className="fill-foreground text-2xl font-bold tabular-nums"
                                                         >
-                                                            {totalExpenses}
+                                                            {totalProjects}
                                                         </tspan>
                                                     </text>
                                                 );
@@ -217,24 +219,24 @@ export function InsightCards() {
                                     />
                                 </PolarRadiusAxis>
                                 <RadialBar
-                                    dataKey="other"
+                                    dataKey="development"
                                     stackId="a"
                                     cornerRadius={4}
-                                    fill="var(--color-other)"
+                                    fill="var(--color-development)"
                                     className="stroke-card stroke-4"
                                 />
                                 <RadialBar
-                                    dataKey="transport"
+                                    dataKey="uat"
                                     stackId="a"
                                     cornerRadius={4}
-                                    fill="var(--color-transport)"
+                                    fill="var(--color-uat)"
                                     className="stroke-card stroke-4"
                                 />
                                 <RadialBar
-                                    dataKey="groceries"
+                                    dataKey="production"
                                     stackId="a"
                                     cornerRadius={4}
-                                    fill="var(--color-groceries)"
+                                    fill="var(--color-production)"
                                     className="stroke-card stroke-4"
                                 />
                             </RadialBarChart>
@@ -248,7 +250,7 @@ export function InsightCards() {
                             </div>
                             <div className="space-y-0.5 text-center">
                                 <p className="text-muted-foreground text-xs uppercase">Production</p>
-                                <p className="font-medium tabular-nums">{chartData[0].groceries}</p>
+                                <p className="font-medium tabular-nums">{chartData[0].production}</p>
                             </div>
                         </div>
                         <Separator orientation="vertical" className="!h-auto" />
@@ -258,7 +260,7 @@ export function InsightCards() {
                             </div>
                             <div className="space-y-0.5 text-center">
                                 <p className="text-muted-foreground text-xs uppercase">Testing</p>
-                                <p className="font-medium tabular-nums">{chartData[0].transport}</p>
+                                <p className="font-medium tabular-nums">{chartData[0].uat}</p>
                             </div>
                         </div>
                         <Separator orientation="vertical" className="!h-auto" />
@@ -268,7 +270,7 @@ export function InsightCards() {
                             </div>
                             <div className="space-y-0.5 text-center">
                                 <p className="text-muted-foreground text-xs uppercase">Under Development</p>
-                                <p className="font-medium tabular-nums">{chartData[0].other}</p>
+                                <p className="font-medium tabular-nums">{chartData[0].development}</p>
                             </div>
                         </div>
                     </div>

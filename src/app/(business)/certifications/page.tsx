@@ -1,7 +1,7 @@
 import { Heading } from "@/features/business/components/heading";
 // import { DataTable } from "./_components/data-table";
 import { headerData, cardData } from "./_components/data";
-import { DocumentCard } from "./_components/document-cards";
+import { DocumentCard } from "./_components/certificate-cards";
 
 export default function Page() {
     return (

@@ -10,9 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { CardViewOptions } from "@/components/card-section/card-view-options";
 import { CardView } from "@/components/card-section/card-view";
-import { CardItem } from "@/components/card-section/card-item";
-import { DocumentDialog, QuickDocumentDialog } from "@/app/(business)/certifications/_components/document-dialog";
-import { Button } from "@/components/ui/button";
+import { DocumentCardItem } from "@/components/card-section/card-item";
+import { DocumentDialog, QuickDocumentDialog } from "@/app/(business)/certifications/_components/certificate-dialog";
 import { useDocumentToast } from "@/components/sonner";
 import { cardData } from "./data";
 
@@ -139,7 +138,7 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                     onReorder={setData}
                     getItemId={(item) => item.id}
                     renderCard={(item, index) => (
-                        <CardItem
+                        <DocumentCardItem
                             data={item}
                             index={index}
                             hasDocument={uploadedDocuments.has(item.id)}
@@ -149,20 +148,7 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                 />
             </TabsContent>
             <TabsContent value="legal" className="relative flex flex-col gap-4 overflow-auto">
-                <CardView
-                    data={data}
-                    columns={cardColumns}
-                    dndEnabled={true}
-                    onReorder={setData}
-                    renderCard={(item, index) => (
-                        <CardItem
-                            data={item}
-                            index={index}
-                            hasDocument={uploadedDocuments.has(item.id)}
-                            onUpload={handleDocumentUpload}
-                        />
-                    )}
-                />
+                <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
             </TabsContent>
             <TabsContent value="sanctions" className="flex flex-col">
                 <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>

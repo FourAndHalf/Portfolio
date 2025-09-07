@@ -27,6 +27,8 @@ import {
   Code,
   BriefcaseBusiness,
   ShieldCheck,
+  ChartCandlestick,
+  BanknoteArrowUp,
 } from "lucide-react";
 
 export interface NavSubItem {
@@ -63,6 +65,24 @@ export const sidebarItems: NavGroup[] = [
         title: "Developer",
         url: "/developer",
         icon: Code,
+      },
+      {
+        title: "CRM",
+        url: "/crm",
+        icon: ChartCandlestick,
+        comingSoon: true,
+      },
+      {
+        title: "Finance",
+        url: "/finance",
+        icon: BanknoteArrowUp,
+        comingSoon: true,
+      },
+      {
+        title: "Investments",
+        url: "/investments",
+        icon: Network,
+        comingSoon: true,
       },
     ],
   },

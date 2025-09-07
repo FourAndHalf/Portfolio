@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback } from "react";
-import { toast, documentToast, validationToast } from "@/components/sonner/toast";
+import { toast } from "@/components/sonner/toast";
+import { documentToast, validationToast } from '../_components/certificate-toast';
 
 export function useToast() {
     const showToast = useCallback((type: "success" | "error" | "warning" | "info" | "loading", message: string, options?: any) => {

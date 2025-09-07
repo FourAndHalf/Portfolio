@@ -48,6 +48,9 @@
   --color-mobile: var(--chart-2);
   --color-eduzell: var(--chart-1);
   --color-assuretech: var(--chart-2);
+  --color-production: var(--chart-1);
+  --color-uat: var(--chart-2);
+  --color-development: var(--chart-3);
 }
 
 /* Default theme styles (used when no data-theme-preset is set or when 'default' is selected).

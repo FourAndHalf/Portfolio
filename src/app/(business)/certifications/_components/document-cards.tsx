@@ -149,20 +149,7 @@ export function DocumentCard({ data: initialData = cardData }: { data?: CardData
                 />
             </TabsContent>
             <TabsContent value="legal" className="relative flex flex-col gap-4 overflow-auto">
-                <CardView
-                    data={data}
-                    columns={cardColumns}
-                    dndEnabled={true}
-                    onReorder={setData}
-                    renderCard={(item, index) => (
-                        <DocumentCardItem
-                            data={item}
-                            index={index}
-                            hasDocument={uploadedDocuments.has(item.id)}
-                            onUpload={handleDocumentUpload}
-                        />
-                    )}
-                />
+                <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
             </TabsContent>
             <TabsContent value="sanctions" className="flex flex-col">
                 <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>

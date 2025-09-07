@@ -42,19 +42,16 @@ export function DataTable({ data: initialData }: { data: any[] }) {
   const tables: Record<string, any> = {
     milestones: milestoneTable,
     workforce: workforceTable,
-    'ground-staffs': groundStaffsTable,
     inventory: inventoryTable,
   }
 
   const handleClick = () => {
-    if (window.innerWidth < 640) {
       setRevealed((prev) => !prev);
-    }
   };
 
   return (
     <Tabs
-      defaultValue="milestones"
+      defaultValue="projects"
       onClick={handleClick}
       className={`w-full flex-col justify-start gap-6 transition-smooth duration-300 ${revealed ? "blur-none" : "blur-xs"
         } sm:hover:blur-none`}
@@ -63,29 +60,25 @@ export function DataTable({ data: initialData }: { data: any[] }) {
         <Label htmlFor="view-selector" className="sr-only">
           View
         </Label>
-        <Select defaultValue="milestones">
+        <Select defaultValue="projects">
           <SelectTrigger className="flex w-fit @4xl/main:hidden" size="sm" id="view-selector">
             <SelectValue placeholder="Select a view" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="milestones">Milestones</SelectItem>
-            <SelectItem value="workforce">Workforce</SelectItem>
-            <SelectItem value="ground-staffs">Ground Staffs</SelectItem>
-            <SelectItem value="inventory">Inventory</SelectItem>
+            <SelectItem value="projects">Projects</SelectItem>
+            <SelectItem value="certifications">Certifications</SelectItem>
+            <SelectItem value="hobbies">Hobbies</SelectItem>
           </SelectContent>
         </Select>
         <TabsList className="**:data-[slot=badge]:bg-muted-foreground/30 hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:px-1 @4xl/main:flex">
-          <TabsTrigger value="milestones">
-            Milestones
+          <TabsTrigger value="projects">
+            Projects
           </TabsTrigger>
-          <TabsTrigger value="workforce">
-            Workforce
+          <TabsTrigger value="certifications">
+            Certifications <Badge variant="secondary">3</Badge>
           </TabsTrigger>
-          <TabsTrigger value="ground-staffs">
-            Ground Staffs
-          </TabsTrigger>
-          <TabsTrigger value="inventory">
-            Inventory <Badge variant="secondary">3</Badge>
+          <TabsTrigger value="hobbies">
+            Hobbies 
           </TabsTrigger>
         </TabsList>
         <div className="flex items-center gap-2">
@@ -96,25 +89,19 @@ export function DataTable({ data: initialData }: { data: any[] }) {
           </Button> */}
         </div>
       </div>
-      <TabsContent value="milestones" className="relative flex flex-col gap-4 overflow-auto">
+      <TabsContent value="projects" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
           <DataTableNew dndEnabled table={milestoneTable} columns={milestoneCols} onReorder={setData} />
         </div>
         <DataTablePagination table={milestoneTable} />
       </TabsContent>
-      <TabsContent value="workforce" className="relative flex flex-col gap-4 overflow-auto">
+      <TabsContent value="certifications" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
           <DataTableNew dndEnabled table={workforceTable} columns={workforceCols} />
         </div>
         <DataTablePagination table={workforceTable} />
       </TabsContent>
-      <TabsContent value="ground-staffs" className="relative flex flex-col gap-4 overflow-auto">
-        <div className="overflow-hidden rounded-lg border">
-          <DataTableNew dndEnabled table={groundStaffsTable} columns={groundStaffsCols} />
-        </div>
-        <DataTablePagination table={groundStaffsTable} />
-      </TabsContent>
-      <TabsContent value="inventory" className="relative flex flex-col gap-4 overflow-auto">
+      <TabsContent value="hobbies" className="relative flex flex-col gap-4 overflow-auto">
         <div className="overflow-hidden rounded-lg border">
           <DataTableNew dndEnabled table={inventoryTable} columns={inventoryCols} />
         </div>

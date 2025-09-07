@@ -4,7 +4,7 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardAction, CardDescription, CardFooter, CardHeader, CardTitle, CardProgressbar, CardContent } from "@/components/ui/card";
-import { budgetUsageChartConfig, budgetUsageChartData } from "./contractor.config";
+import { budgetUsageChartConfig, budgetUsageChartData } from "./developer.config";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts";
 import { useState } from "react";

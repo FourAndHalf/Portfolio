@@ -1,8 +1,8 @@
 import { CardData } from "./schema";
 
 export const headerData = {
-    "header": "Documents",
-    "subHeader": "Upload the documents related to the construction here for easier access"
+    "header": "Certificates",
+    "subHeader": "Certificates that shaped the person I am"
 }
 
 export const cardData: CardData[] = [

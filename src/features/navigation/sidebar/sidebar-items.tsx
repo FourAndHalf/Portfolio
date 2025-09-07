@@ -74,11 +74,13 @@ export const sidebarItems: NavGroup[] = [
         title: "Experience",
         url: "/experience",
         icon: BriefcaseBusiness,
+        comingSoon: true,
       },
       {
         title: "Works",
         url: "/works",
         icon: Pickaxe,
+        comingSoon: true,
       },
       {
         title: "Certifications",
@@ -89,6 +91,7 @@ export const sidebarItems: NavGroup[] = [
         title: "Journal",
         url: "/journal",
         icon: Files,
+        comingSoon: true,
       },
     ],
   },

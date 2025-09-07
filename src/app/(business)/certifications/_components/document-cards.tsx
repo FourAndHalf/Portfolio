@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { CardViewOptions } from "@/components/card-section/card-view-options";
 import { CardView } from "@/components/card-section/card-view";
 import { DocumentCardItem } from "@/components/card-section/card-item";
-import { DocumentDialog, QuickDocumentDialog } from "@/app/(business)/documents/_components/document-dialog";
+import { DocumentDialog, QuickDocumentDialog } from "@/app/(business)/certifications/_components/document-dialog";
 import { Button } from "@/components/ui/button";
 import { useDocumentToast } from "@/components/sonner";
 import { cardData } from "./data";

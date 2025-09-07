@@ -31,7 +31,8 @@ export type FieldType =
     | "select"
     | "checkbox"
     | "date"
-    | "file";
+    | "file"
+    | "icon";
 
 export interface FieldConfig {
     name: string;

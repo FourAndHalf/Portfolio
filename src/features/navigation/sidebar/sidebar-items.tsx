@@ -24,6 +24,9 @@ import {
   MapPinned,
   Pickaxe,
   Users2,
+  Code,
+  BriefcaseBusiness,
+  ShieldCheck,
 } from "lucide-react";
 
 export interface NavSubItem {
@@ -57,48 +60,9 @@ export const sidebarItems: NavGroup[] = [
     label: "Dashboards",
     items: [
       {
-        title: "Contractor",
-        url: "/contractor",
-        icon: Network,
-      },
-      {
-        title: "Site Manager",
-        url: "/sitemanager",
-        icon: MapPinned,
-      },
-      {
-        title: "Supervisor",
-        url: "/supervisor",
-        icon: Users,
-        comingSoon: true,
-      },
-      {
-        title: "Worker",
-        url: "/worker",
-        icon: Pickaxe,
-        comingSoon: true,
-      },
-      {
-        title: "CRM",
-        url: "/crm",
-        icon: ChartBar,
-      },
-      {
-        title: "Finance",
-        url: "/finance",
-        icon: Banknote,
-      },
-      {
-        title: "Analytics",
-        url: "/analytics",
-        icon: Gauge,
-        comingSoon: true,
-      },
-      {
-        title: "Logistics",
-        url: "/logistics",
-        icon: Forklift,
-        comingSoon: true,
+        title: "Developer",
+        url: "/developer",
+        icon: Code,
       },
     ],
   },
@@ -107,66 +71,24 @@ export const sidebarItems: NavGroup[] = [
     label: "Pages",
     items: [
       {
-        title: "Requests",
-        url: "/requests",
-        icon: FileAxis3D,
+        title: "Experience",
+        url: "/experience",
+        icon: BriefcaseBusiness,
       },
       {
-        title: "Approvals",
-        url: "/approvals",
-        icon: FileCheck,
+        title: "Works",
+        url: "/works",
+        icon: Pickaxe,
       },
       {
-        title: "Documents",
-        url: "/documents",
+        title: "Certifications",
+        url: "/certifications",
+        icon: GraduationCap,
+      },
+      {
+        title: "Journal",
+        url: "/journal",
         icon: Files,
-      },
-      {
-        title: "Complaints",
-        url: "/complaints",
-        icon: OctagonAlert,
-        comingSoon: true,
-      },
-      {
-        title: "Email",
-        url: "/mail",
-        icon: Mail,
-        comingSoon: true,
-      },
-      {
-        title: "Chat",
-        url: "/chat",
-        icon: MessageSquare,
-        comingSoon: true,
-      },
-      {
-        title: "Calendar",
-        url: "/calendar",
-        icon: Calendar,
-        comingSoon: true,
-      },
-      {
-        title: "Kanban",
-        url: "/kanban",
-        icon: Kanban,
-        comingSoon: true,
-      },
-      {
-        title: "Invoice",
-        url: "/invoice",
-        icon: ReceiptText,
-      },
-      {
-        title: "Users",
-        url: "/users",
-        icon: Users,
-        comingSoon: true,
-      },
-      {
-        title: "Roles",
-        url: "/roles",
-        icon: Lock,
-        comingSoon: true,
       },
     ],
   },

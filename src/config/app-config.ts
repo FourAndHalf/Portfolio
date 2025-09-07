@@ -3,12 +3,12 @@ import packageJson from "@/../package.json";
 const currentYear = new Date().getFullYear();
 
 export const APP_CONFIG = {
-  name: "Workforce",
+  name: "Jinson E B",
   version: packageJson.version,
-  copyright: `© ${currentYear}, Workforce.`,
+  copyright: `© ${currentYear}, Jinson.`,
   meta: {
-    title: "Workforce",
+    title: "Jinson",
     description:
-      "A modern, workforce management system to make the life easier for the managers.",
+      "A fullstack developer to make the life easier for the managers.",
   },
 };

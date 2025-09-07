@@ -2,7 +2,7 @@ import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader,
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FileText, Trash2, TrendingUp, Upload } from "lucide-react";
-import { CardData } from "@/app/(business)/documents/_components/schema";
+import { CardData } from "@/app/(business)/certifications/_components/schema";
 import { toDateInputValue } from "@/lib/utils";
 
 interface DocumentCardItemProps {

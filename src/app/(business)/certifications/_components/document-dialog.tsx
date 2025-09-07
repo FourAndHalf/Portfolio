@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { DialogForm, FieldConfig } from "@/components/dialog/dialog-view";
-import { CardData } from "@/app/(business)/documents/_components/schema";
+import { CardData } from "@/app/(business)/certifications/_components/schema";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, FileText } from "lucide-react";
 

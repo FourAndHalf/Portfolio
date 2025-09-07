@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Jinson E B",
   description: "Managing your commitments",
+  icons: {
+    icon: "/images/icon.png"
+  }
 };
 
 export default function RootLayout({

@@ -127,7 +127,9 @@ export function InsightCards() {
                     <Button size="sm" variant="outline" className="w-full sm:w-1/2">
                         View Full Experience
                     </Button>
-                    <Button size="sm" variant="outline" className="w-full sm:w-1/2">
+                    <Button size="sm" variant="outline"
+                        className="w-full sm:w-1/2"
+                        onClick={() => window.open('/resume/Jinson%20EB.pdf', '_blank')}>
                         View Resume
                     </Button>
                 </CardFooter>

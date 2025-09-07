@@ -1,7 +1,7 @@
-### Workforce
+### Portfolio
 
-# This is our workforce website for the construction industry
+# This is my portfolio for recruiters
 
 ## Pending Enhancements
 
-* Change the card widgets in dashboard to a reusable file 
+* Change the data values in the cards

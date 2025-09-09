@@ -68,8 +68,7 @@ export function DocumentDialog({
 }: DocumentDialogProps) {
     const isEditing = !!document;
 
-    const handleSubmit = async (data: Record<string, any>) => {
-        // Convert form data to CardData format
+    const handleSubmit = async (data: Partial<CardData>) => {
         const documentData: Partial<CardData> = {
             title: data.title,
             authorizingBody: data.authorizingBody,
@@ -141,7 +140,7 @@ export function QuickDocumentDialog({
         },
     ];
 
-    const handleSubmit = async (data: Record<string, any>) => {
+    const handleSubmit = async (data: Partial<CardData>) => {
         const documentData: Partial<CardData> = {
             title: data.title,
             authorizingBody: data.authorizingBody,

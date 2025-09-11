@@ -13,7 +13,7 @@ import {
 } from "./developer.config";
 import { Separator } from "@/components/ui/separator";
 import { useDeveloperToast } from "./use-toast";
-import { Ellipsis, ShoppingBasket, TramFront } from "lucide-react";
+import { Bug, Ellipsis, ShoppingBasket, TramFront } from "lucide-react";
 
 export function InsightCards() {
     const lastMonth = format(subMonths(new Date(), 1), "LLLL");
@@ -25,7 +25,7 @@ export function InsightCards() {
     );
     const totalExpInYears = (totalExperience / 12).toFixed(1);
 
-    const chartData = [{ period: "last-week", production: 380, uat: 120, development: 80 }];
+    const chartData = [{ period: "last-week", production: 8, uat: 2, development: 2 }];
 
     const chartConfig = {
         production: {
@@ -125,7 +125,7 @@ export function InsightCards() {
                 </CardContent>
 
                 <CardFooter className="flex flex-col sm:flex-row gap-2">
-                    <Button size="sm" variant="outline" 
+                    <Button size="sm" variant="outline"
                         className="w-full sm:w-1/2">
                         View Full Experience
                     </Button>
@@ -185,70 +185,29 @@ export function InsightCards() {
             </Card>
             <Card className="col-span-1 xl:col-span-2">
                 <CardHeader>
-                    <CardTitle>Projects</CardTitle>
+                    <CardTitle>Projects Overview</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4 max-h-48">
                     <Separator />
-                    <div className="h-24">
-                        <ChartContainer config={chartConfig}>
-                            <RadialBarChart
-                                margin={{ left: 0, right: 0, top: 0, bottom: 0 }}
-                                data={chartData}
-                                endAngle={180}
-                                innerRadius={80}
-                                outerRadius={130}
-                            >
-                                <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-                                <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
-                                    <Label
-                                        content={({ viewBox }) => {
-                                            if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                                                return (
-                                                    <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle">
-                                                        <tspan
-                                                            x={viewBox.cx}
-                                                            y={(viewBox.cy ?? 0) - 16}
-                                                            className="fill-foreground text-2xl font-bold tabular-nums"
-                                                        >
-                                                            {totalProjects}
-                                                        </tspan>
-                                                    </text>
-                                                );
-                                            }
-                                        }}
-                                    />
-                                </PolarRadiusAxis>
-                                <RadialBar
-                                    dataKey="development"
-                                    stackId="a"
-                                    cornerRadius={4}
-                                    fill="var(--color-development)"
-                                    className="stroke-card stroke-4"
-                                />
-                                <RadialBar
-                                    dataKey="uat"
-                                    stackId="a"
-                                    cornerRadius={4}
-                                    fill="var(--color-uat)"
-                                    className="stroke-card stroke-4"
-                                />
-                                <RadialBar
-                                    dataKey="production"
-                                    stackId="a"
-                                    cornerRadius={4}
-                                    fill="var(--color-production)"
-                                    className="stroke-card stroke-4"
-                                />
-                            </RadialBarChart>
-                        </ChartContainer>
+                    <div>
+                        <p className="mt-2 text-base leading-relaxed text-foreground text-center lg:text-left">
+                            1. Customer Relationship Management System for Dubai based financial institution.
+                            <br />
+                            2. Complaint Portal for a leading financial institution.
+                            <br />
+                            3. Mobile Applications for HRMS System and Insurance System.
+                            <br />
+                            4. Angular application for HRMS System.
+                        </p>
                     </div>
                     <Separator />
                     <div className="flex justify-between gap-4">
+                        <Separator orientation="vertical" className="!h-auto" />
                         <div className="flex flex-1 flex-col items-center space-y-2">
                             <div className="bg-muted flex size-10 items-center justify-center rounded-full">
-                                <ShoppingBasket className="stroke-chart-1 size-5" />
+                                <ShoppingBasket className="stroke-chart-3 size-5" />
                             </div>
-                            <div className="space-y-0.5 text-center">
+                            <div className="text-sm space-y-0.5 text-center">
                                 <p className="text-muted-foreground text-xs uppercase">Production</p>
                                 <p className="font-medium tabular-nums">{chartData[0].production}</p>
                             </div>
@@ -256,9 +215,9 @@ export function InsightCards() {
                         <Separator orientation="vertical" className="!h-auto" />
                         <div className="flex flex-1 flex-col items-center space-y-2">
                             <div className="bg-muted flex size-10 items-center justify-center rounded-full">
-                                <TramFront className="stroke-chart-2 size-5" />
+                                <Bug className="stroke-chart-3 size-5" />
                             </div>
-                            <div className="space-y-0.5 text-center">
+                            <div className="text-sm space-y-0.5 text-center">
                                 <p className="text-muted-foreground text-xs uppercase">Testing</p>
                                 <p className="font-medium tabular-nums">{chartData[0].uat}</p>
                             </div>
@@ -268,7 +227,7 @@ export function InsightCards() {
                             <div className="bg-muted flex size-10 items-center justify-center rounded-full">
                                 <Ellipsis className="stroke-chart-3 size-5" />
                             </div>
-                            <div className="space-y-0.5 text-center">
+                            <div className="text-sm space-y-0.5 text-center">
                                 <p className="text-muted-foreground text-xs uppercase">Under Development</p>
                                 <p className="font-medium tabular-nums">{chartData[0].development}</p>
                             </div>

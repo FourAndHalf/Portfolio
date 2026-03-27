@@ -1,0 +1,51 @@
+/* 
+label: Midnight Executive
+value: midnight-executive 
+*/
+
+:root[data-theme-preset="midnight-executive"] {
+  --radius: 0.5rem;
+  --card: oklch(0.08 0.02 260);
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.08 0.02 260);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.6 0.2 250); /* Blue 500-ish */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.15 0.03 260);
+  --secondary-foreground: oklch(0.9 0 0);
+  --muted: oklch(0.15 0.03 260);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.7 0.15 340); /* Pink-ish */
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.2 25);
+  --border: oklch(0.2 0 0);
+  --input: oklch(0.2 0 0);
+  --ring: oklch(0.6 0.2 250);
+  --chart-1: oklch(0.6 0.2 250);
+  --chart-2: oklch(0.7 0.15 340);
+  --chart-3: oklch(0.8 0.1 140);
+  --chart-4: oklch(0.85 0.1 85);
+  --chart-5: oklch(0.5 0.2 300);
+  --sidebar: oklch(0.05 0.01 260);
+  --sidebar-foreground: oklch(0.95 0 0);
+  --sidebar-primary: oklch(0.6 0.2 250);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.15 0.03 260);
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  --sidebar-border: oklch(0.2 0 0);
+  --sidebar-ring: oklch(0.6 0.2 250);
+  --background: oklch(0.02 0.01 260); /* Deep Slate */
+  --foreground: oklch(0.98 0 0);
+  --shadow-2xs: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-xs: 0 1px 3px 0 rgb(0 0 0 / 0.5);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.5);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.7);
+}
+
+.dark:root[data-theme-preset="midnight-executive"] {
+    /* Same as root since this is a dark-first theme, but can tweak if needed */
+}

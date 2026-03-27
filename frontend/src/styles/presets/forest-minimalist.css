@@ -1,0 +1,55 @@
+/* 
+label: Forest Minimalist
+value: forest-minimalist 
+*/
+
+:root[data-theme-preset="forest-minimalist"] {
+  --radius: 0.5rem;
+  --card: oklch(0.98 0.01 140);
+  --card-foreground: oklch(0.1 0.02 140);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1 0.02 140);
+  --primary: oklch(0.55 0.15 145); /* Emerald Green */
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.96 0.01 140);
+  --secondary-foreground: oklch(0.2 0.02 140);
+  --muted: oklch(0.96 0.01 140);
+  --muted-foreground: oklch(0.5 0.02 140);
+  --accent: oklch(0.9 0.05 145);
+  --accent-foreground: oklch(0.1 0.02 140);
+  --destructive: oklch(0.6 0.2 25);
+  --border: oklch(0.9 0.01 140);
+  --input: oklch(0.9 0.01 140);
+  --ring: oklch(0.55 0.15 145);
+  --chart-1: oklch(0.55 0.15 145);
+  --chart-2: oklch(0.65 0.12 160);
+  --chart-3: oklch(0.45 0.1 130);
+  --chart-4: oklch(0.7 0.15 85);
+  --chart-5: oklch(0.6 0.1 200);
+  --sidebar: oklch(0.97 0.01 140);
+  --sidebar-foreground: oklch(0.1 0.02 140);
+  --sidebar-primary: oklch(0.55 0.15 145);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.9 0.05 145);
+  --sidebar-accent-foreground: oklch(0.1 0.02 140);
+  --sidebar-border: oklch(0.9 0.01 140);
+  --sidebar-ring: oklch(0.55 0.15 145);
+  --background: oklch(0.99 0.005 140);
+  --foreground: oklch(0.1 0.02 140);
+  --shadow-2xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-xs: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+.dark:root[data-theme-preset="forest-minimalist"] {
+  --background: oklch(0.05 0.01 140);
+  --foreground: oklch(0.9 0.02 140);
+  --card: oklch(0.1 0.02 140);
+  --card-foreground: oklch(0.9 0.02 140);
+  /* ... dark overrides if needed ... */
+}

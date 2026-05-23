@@ -4,10 +4,10 @@ import { authMiddleware } from "./middleware/auth-middleware";
 
 export function middleware(req: NextRequest) {
   // authMiddleware
-//   const response = authMiddleware(req);
-//   if (response) {
-//     return response;
-//   }
+  const response = authMiddleware(req);
+  if (response && response.status !== 200) {
+    return response;
+  }
 
   return NextResponse.next();
 }

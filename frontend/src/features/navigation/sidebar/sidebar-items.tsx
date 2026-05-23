@@ -70,37 +70,32 @@ export const sidebarItems: NavGroup[] = [
         title: "CRM",
         url: "/crm",
         icon: ChartCandlestick,
-        comingSoon: true,
       },
       {
         title: "Finance",
         url: "/finance",
         icon: BanknoteArrowUp,
-        comingSoon: true,
       },
       {
         title: "Investments",
         url: "/investments",
         icon: Network,
-        comingSoon: true,
       },
-    ],
-  },
-  {
-    id: 2,
-    label: "Pages",
-    items: [
+      ],
+      },
+      {
+      id: 2,
+      label: "Pages",
+      items: [
       {
         title: "Experience",
         url: "/experience",
         icon: BriefcaseBusiness,
-        comingSoon: true,
       },
       {
         title: "Works",
         url: "/works",
         icon: Pickaxe,
-        comingSoon: true,
       },
       {
         title: "Certifications",
@@ -111,8 +106,7 @@ export const sidebarItems: NavGroup[] = [
         title: "Journal",
         url: "/journal",
         icon: Files,
-        comingSoon: true,
       },
-    ],
-  },
-];
+      ],
+      },
+      ];

@@ -2,14 +2,25 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export function authMiddleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const isLoggedIn = req.cookies.get("auth-token");
+  const sessionToken = req.cookies.get("session_token");
 
-  if (!isLoggedIn && pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/auth/login", req.url));
+  // Private routes (dashboard and business groups)
+  const isPrivateRoute = pathname.startsWith("/crm") || 
+                         pathname.startsWith("/developer") || 
+                         pathname.startsWith("/finance") || 
+                         pathname.startsWith("/investments") ||
+                         pathname.startsWith("/certifications") ||
+                         pathname.startsWith("/expenses") ||
+                         pathname.startsWith("/experience") ||
+                         pathname.startsWith("/journal") ||
+                         pathname.startsWith("/works");
+
+  if (!sessionToken && isPrivateRoute) {
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  if (isLoggedIn && pathname === "/auth/login") {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+  if (sessionToken && (pathname === "/login" || pathname === "/register")) {
+    return NextResponse.redirect(new URL("/crm", req.url)); // Default dashboard
   }
 
   return NextResponse.next();

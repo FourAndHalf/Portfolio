@@ -26,7 +26,6 @@ export default function Navbar() {
           const isActive = pathname === href;
           return (
             <Link key={href} href={href} className="relative px-4 py-2 text-sm text-neutral-300 hover:text-white transition-colors">
-              {label}
               {isActive && (
                 <motion.div
                   layoutId="active-pill"

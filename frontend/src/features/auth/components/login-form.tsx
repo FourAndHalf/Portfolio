@@ -10,6 +10,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import { useRouter } from "next/navigation";
+import { apiFetch } from "@/services/api";
+
 const FormSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
   password: z.string().min(6, { message: "Password must be at least 6 characters." }),
@@ -17,6 +20,7 @@ const FormSchema = z.object({
 });
 
 export function LoginForm() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -27,13 +31,25 @@ export function LoginForm() {
   });
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    toast("You submitted the following values", {
-      description: (
-        <pre className="mt-2 w-[320px] rounded-md bg-neutral-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    try {
+      const res = await apiFetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          username: data.email, // Using email as username for login
+          password: data.password,
+        }),
+      });
+
+      if (res.ok) {
+        toast.success("Login successful!");
+        router.push("/crm"); // Redirect to dashboard
+      } else {
+        const error = await res.text();
+        toast.error(error || "Invalid credentials");
+      }
+    } catch (err) {
+      toast.error("Failed to connect to authentication server");
+    }
   };
 
   return (

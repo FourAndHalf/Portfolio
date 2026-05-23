@@ -9,6 +9,7 @@ import {
   Briefcase,
   Monitor,
   User,
+  Banknote,
 } from "lucide-react";
 
 import {
@@ -56,15 +57,23 @@ export function CommandMenu() {
         <CommandGroup heading="Suggestions">
           <CommandItem onSelect={() => runCommand(() => router.push("/developer"))}>
             <LayoutGrid className="mr-2 h-4 w-4" />
-            <span>Dashboard</span>
+            <span>Developer HUD</span>
           </CommandItem>
-          <CommandItem onSelect={() => runCommand(() => router.push("/works"))}>
-            <Briefcase className="mr-2 h-4 w-4" />
-            <span>Works</span>
+          <CommandItem onSelect={() => runCommand(() => router.push("/finance"))}>
+            <Banknote className="mr-2 h-4 w-4" />
+            <span>Finance</span>
+          </CommandItem>
+          <CommandItem onSelect={() => runCommand(() => router.push("/investments"))}>
+            <Monitor className="mr-2 h-4 w-4" />
+            <span>Investments</span>
+          </CommandItem>
+          <CommandItem onSelect={() => runCommand(() => router.push("/journal"))}>
+            <User className="mr-2 h-4 w-4" />
+            <span>Journal</span>
           </CommandItem>
           <CommandItem onSelect={() => runCommand(() => router.push("/crm"))}>
             <User className="mr-2 h-4 w-4" />
-            <span>CRM</span>
+            <span>Relational CRM</span>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />

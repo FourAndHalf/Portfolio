@@ -64,6 +64,14 @@ export const THEME_MODE_OPTIONS = [
         dark: "oklch(0.55 0.15 145)",
       },
     },
+    {
+      label: "Technical Precision",
+      value: "technical-precision",
+      primary: {
+        light: "#add531",
+        dark: "#add531",
+      },
+    },
   ] as const;
   
   export const THEME_PRESET_VALUES = THEME_PRESET_OPTIONS.map((p) => p.value);

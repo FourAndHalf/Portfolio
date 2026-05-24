@@ -6,6 +6,7 @@
 @import "../styles/presets/tangerine.css";
 @import "../styles/presets/midnight-executive.css";
 @import "../styles/presets/forest-minimalist.css";
+@import "../styles/presets/technical-precision.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -137,6 +138,39 @@ These serve as the fallback; there is no separate default.css file. */
 
   .glass-card {
     @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl transition-all duration-300 hover:bg-white/10 hover:border-white/20;
+  }
+
+  /* Technical Precision Typography */
+  .text-display {
+    font-family: var(--font-display);
+    font-size: 3rem; /* 48px */
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .text-headline-lg {
+    font-family: var(--font-display);
+    font-size: 2rem; /* 32px */
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .text-code-md {
+    font-family: var(--font-technical);
+    font-size: 0.875rem; /* 14px */
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .text-label-caps {
+    font-family: var(--font-technical);
+    font-size: 0.6875rem; /* 11px */
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   [data-theme-preset]:not([data-theme-preset="default"]) .shadow-2xs {

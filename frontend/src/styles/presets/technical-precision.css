@@ -1,0 +1,73 @@
+/* 
+label: Technical Precision
+value: technical-precision 
+*/
+
+:root[data-theme-preset="technical-precision"] {
+  --radius: 0.5rem;
+  --background: oklch(0.98 0.01 60); /* Soft whiteish */
+  --foreground: oklch(0.13 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0 0);
+  --primary: oklch(0.82 0.22 110); /* Lime Green #add531 */
+  --primary-foreground: oklch(0.2 0.05 110);
+  --secondary: oklch(0.91 0.01 60);
+  --secondary-foreground: oklch(0.13 0 0);
+  --muted: oklch(0.91 0.01 60);
+  --muted-foreground: oklch(0.5 0.01 60);
+  --accent: oklch(0.82 0.22 110);
+  --accent-foreground: oklch(0.2 0.05 110);
+  --destructive: oklch(0.6 0.18 25);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.82 0.22 110);
+  
+  /* Typography */
+  --font-display: var(--font-inter);
+  --font-technical: var(--font-jetbrains-mono);
+
+  /* Spacing */
+  --spacing-unit: 4px;
+  --gutter: 16px;
+
+  --shadow-2xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-xs: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.15);
+}
+
+.dark:root[data-theme-preset="technical-precision"] {
+  --background: oklch(0.13 0 0); /* #0D0D0D */
+  --foreground: oklch(0.91 0.01 60); /* #E5E2E1 */
+  --card: oklch(0.18 0 0); /* #1A1A1A */
+  --card-foreground: oklch(0.91 0.01 60);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.91 0.01 60);
+  --primary: oklch(0.82 0.22 110); /* #add531 */
+  --primary-foreground: oklch(0.13 0 0);
+  --secondary: oklch(0.23 0 0); /* #262626 */
+  --secondary-foreground: oklch(0.91 0.01 60);
+  --muted: oklch(0.23 0 0);
+  --muted-foreground: oklch(0.69 0.01 260); /* #A1A1AA */
+  --accent: oklch(0.82 0.22 110);
+  --accent-foreground: oklch(0.13 0 0);
+  --destructive: oklch(0.6 0.18 25);
+  --border: oklch(0.23 0 0); /* #262626 */
+  --input: oklch(0.23 0 0);
+  --ring: oklch(0.82 0.22 110);
+
+  --shadow-2xs: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-xs: 0 1px 3px 0 rgb(0 0 0 / 0.5);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.5);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.7);
+}

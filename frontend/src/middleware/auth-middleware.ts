@@ -15,12 +15,16 @@ export function authMiddleware(req: NextRequest) {
                          pathname.startsWith("/journal") ||
                          pathname.startsWith("/works");
 
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL(sessionToken ? "/crm" : "/login", req.url));
+  }
+
   if (!sessionToken && isPrivateRoute) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
   if (sessionToken && (pathname === "/login" || pathname === "/register")) {
-    return NextResponse.redirect(new URL("/crm", req.url)); // Default dashboard
+    return NextResponse.redirect(new URL("/developer", req.url)); // Default dashboard
   }
 
   return NextResponse.next();

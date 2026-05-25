@@ -219,3 +219,8 @@ These serve as the fallback; there is no separate default.css file. */
 .disable-transitions * {
   transition: none !important;
 }
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}

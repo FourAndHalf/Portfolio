@@ -206,23 +206,31 @@ export const SystemTerminal = () => {
           </div>
 
           {/* Terminal Content */}
-          <AnimatePresence>
+          <AnimatePresence initial={false}>
             {!isMinimized && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
-                animate={{ height: isMaximized ? "calc(100vh - 8rem)" : "320px", opacity: 1 }}
+                animate={{ 
+                  height: isMaximized ? "calc(100vh - 8rem)" : "320px", 
+                  opacity: 1 
+                }}
                 exit={{ height: 0, opacity: 0 }}
+                transition={{ 
+                  height: { type: "spring", stiffness: 105, damping: 23 },
+                  opacity: { duration: 0.2, ease: "linear" }
+                }}
                 className="overflow-hidden flex flex-col"
               >
                 <div 
                   ref={scrollRef}
-                  className="flex-1 p-6 font-technical text-sm text-left space-y-2 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/20"
+                  className="flex-1 p-6 font-technical text-[0.9375rem] leading-relaxed text-left space-y-2.5 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/20"
                 >
                   {history.map((line) => (
-                    <div key={line.id} className="flex gap-2 break-all">
-                      {line.type === "input" && <span className="text-primary shrink-0">$</span>}
+                    <div key={line.id} className="flex gap-2.5 break-all">
+                      {line.type === "input" && <span className="text-primary font-bold shrink-0">$</span>}
                       <div className={cn(
-                        line.type === "input" ? "text-foreground" : "text-muted-foreground ml-4"
+                        "tracking-tight",
+                        line.type === "input" ? "text-foreground font-medium" : "text-foreground/80 ml-5"
                       )}>
                         {line.isStreaming && typeof line.content === "string" ? (
                           <Typewriter 
@@ -238,18 +246,26 @@ export const SystemTerminal = () => {
                   ))}
                   
                   {!isTyping && (
-                    <form onSubmit={handleSubmit} className="flex gap-2">
-                      <span className="text-primary shrink-0">$</span>
-                      <input
-                        ref={inputRef}
-                        type="text"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        className="flex-1 bg-transparent border-none outline-none text-foreground p-0 m-0 caret-primary"
-                        autoFocus
-                        autoComplete="off"
-                        spellCheck="false"
-                      />
+                    <form onSubmit={handleSubmit} className="flex items-start gap-2.5">
+                      <span className="text-primary font-bold shrink-0 mt-0.5">$</span>
+                      <div className="flex-1 relative flex items-center min-h-[1.5rem]">
+                        {/* Hidden Input */}
+                        <input
+                          ref={inputRef}
+                          type="text"
+                          value={input}
+                          onChange={(e) => setInput(e.target.value)}
+                          className="absolute inset-0 w-full bg-transparent border-none outline-none text-transparent p-0 m-0 font-technical text-[0.9375rem] focus:ring-0 z-10"
+                          autoFocus
+                          autoComplete="off"
+                          spellCheck="false"
+                        />
+                        {/* Visual Text + Cursor */}
+                        <div className="flex items-center font-technical text-[0.9375rem] font-medium text-foreground whitespace-pre-wrap break-all pointer-events-none">
+                          <span>{input}</span>
+                          <div className="bg-primary w-2.5 h-[1.1em] ml-0.5 animate-[blink_1s_step-end_infinite] shrink-0" />
+                        </div>
+                      </div>
                     </form>
                   )}
                 </div>

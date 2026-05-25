@@ -1,27 +1,22 @@
-"use client";
-
-import React, { useEffect } from "react";
-import { updateThemePreset } from "@/lib/theme-utils";
+import { cookies } from "next/headers";
+import { getPreference } from "@/server/server-actions";
 import { PreferencesStoreProvider } from "@/stores/preferences/preferences-provider";
-import { Navigation } from "@/features/landing/components/navigation";
-import { Hero } from "@/features/landing/components/hero";
-import { BentoSection } from "@/features/landing/components/bento-section";
-import { Footer } from "@/features/landing/components/footer";
+import { THEME_MODE_VALUES, THEME_PRESET_VALUES, type ThemeMode, type ThemePreset } from "@/types/preferences/theme";
+import { LandingContent } from "@/features/landing/components/landing-content";
 
-export default function LandingPage() {
-  useEffect(() => {
-    // Force the Technical Precision preset for the landing page
-    updateThemePreset("technical-precision");
-  }, []);
+export default async function LandingPage() {
+  const cookieStore = await cookies();
+  const sessionToken = cookieStore.get("session_token")?.value;
+  const isLoggedIn = !!sessionToken;
+
+  const [themeMode, themePreset] = await Promise.all([
+    getPreference<ThemeMode>("theme_mode", THEME_MODE_VALUES, "dark"),
+    getPreference<ThemePreset>("theme_preset", THEME_PRESET_VALUES, "technical-precision"),
+  ]);
 
   return (
-    <PreferencesStoreProvider themeMode="dark" themePreset="technical-precision">
-      <main className="min-h-screen bg-background text-foreground font-display selection:bg-primary/30 selection:text-primary">
-        <Navigation />
-        <Hero />
-        <BentoSection />
-        <Footer />
-      </main>
+    <PreferencesStoreProvider themeMode={themeMode} themePreset={themePreset}>
+      <LandingContent isLoggedIn={isLoggedIn} />
     </PreferencesStoreProvider>
   );
 }

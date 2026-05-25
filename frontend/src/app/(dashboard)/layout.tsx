@@ -16,6 +16,7 @@ import {
   type SidebarCollapsible,
   type ContentLayout,
 } from "@/types/preferences/layout";
+import { THEME_MODE_VALUES, THEME_PRESET_VALUES, type ThemeMode, type ThemePreset } from "@/types/preferences/theme";
 
 import { AccountSwitcher } from "@/features/dashboard/components/account-switcher";
 import { LayoutControls } from "@/features/dashboard/components/layout-controls";
@@ -28,10 +29,12 @@ export default async function Layout({ children }: Readonly<{ children: ReactNod
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
 
-  const [sidebarVariant, sidebarCollapsible, contentLayout] = await Promise.all([
+  const [sidebarVariant, sidebarCollapsible, contentLayout, themeMode, themePreset] = await Promise.all([
     getPreference<SidebarVariant>("sidebar_variant", SIDEBAR_VARIANT_VALUES, "inset"),
     getPreference<SidebarCollapsible>("sidebar_collapsible", SIDEBAR_COLLAPSIBLE_VALUES, "icon"),
     getPreference<ContentLayout>("content_layout", CONTENT_LAYOUT_VALUES, "full-width"),
+    getPreference<ThemeMode>("theme_mode", THEME_MODE_VALUES, "dark"),
+    getPreference<ThemePreset>("theme_preset", THEME_PRESET_VALUES, "default"),
   ]);
 
   const layoutPreferences = {
@@ -54,8 +57,8 @@ export default async function Layout({ children }: Readonly<{ children: ReactNod
         )}
       >
         <PreferencesStoreProvider
-          themeMode="light"
-          themePreset="default"
+          themeMode={themeMode}
+          themePreset={themePreset}
         >
           <CommandMenu />
           <header className="flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">

@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, JetBrains_Mono } from "next/font/google";
-import "@/styles/globals.css";
+
 import { ToastProvider } from "@/components/sonner";
+import { getPreference } from "@/server/server-actions";
+import { THEME_MODE_VALUES, THEME_PRESET_VALUES, type ThemeMode, type ThemePreset } from "@/types/preferences/theme";
+
+import "@/styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,15 +33,20 @@ export const metadata: Metadata = {
   icons: {
     icon: "/images/icon.png"
   }
-};
+  };
 
-export default function RootLayout({
+  export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [themeMode, themePreset] = await Promise.all([
+    getPreference<ThemeMode>("theme_mode", THEME_MODE_VALUES, "dark"),
+    getPreference<ThemePreset>("theme_preset", THEME_PRESET_VALUES, "default"),
+  ]);
+
   return (
-    <html lang="en">
+    <html lang="en" className={themeMode} data-theme-preset={themePreset}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased bg-background`}
       >

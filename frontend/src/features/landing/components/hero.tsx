@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { SystemTerminal } from "./terminal";
+import Link from "next/link";
+import { LayoutDashboard, Mail } from "lucide-react";
 
-export const Hero = () => {
+export const Hero = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   return (
     <section className="relative pt-32 pb-20 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -45,12 +47,26 @@ export const Hero = () => {
             transition={{ delay: 0.2 }}
             className="flex flex-wrap justify-center gap-4 pt-4"
           >
-            <Button size="lg" className="rounded-lg px-8 font-semibold">
-              View Projects
-            </Button>
-            <Button size="lg" variant="outline" className="rounded-lg px-8">
-              Get in Touch
-            </Button>
+            {isLoggedIn ? (
+              <Link href="/developer">
+                <Button size="lg" className="rounded-lg px-8 font-semibold gap-2">
+                  <LayoutDashboard className="w-5 h-5" />
+                  Go to Command Center
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/register">
+                <Button size="lg" className="rounded-lg px-8 font-semibold">
+                  Get Started
+                </Button>
+              </Link>
+            )}
+            <a href="mailto:jinsoneb@gmail.com">
+              <Button size="lg" variant="outline" className="rounded-lg px-8 gap-2">
+                <Mail className="w-5 h-5" />
+                Get in Touch
+              </Button>
+            </a>
           </motion.div>
 
           <SystemTerminal />

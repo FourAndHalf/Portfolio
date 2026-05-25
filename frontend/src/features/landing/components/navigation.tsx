@@ -1,13 +1,20 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Terminal, ArrowRight } from "lucide-react";
+import { Terminal, ArrowRight, User, LayoutDashboard, LogOut, Settings, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/features/dashboard/components/theme-switcher";
 import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-export const Navigation = () => {
+export const Navigation = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -33,19 +40,49 @@ export const Navigation = () => {
         </div>
         
         <div className="hidden md:flex items-center gap-8 text-label-caps">
-          <a href="#about" className="hover:text-primary transition-colors">01_About</a>
-          <a href="#work" className="hover:text-primary transition-colors">02_Work</a>
-          <a href="#tech" className="hover:text-primary transition-colors">03_Stack</a>
-          <a href="#contact" className="hover:text-primary transition-colors">04_Contact</a>
+          <a href="#about" className="hover:text-primary transition-colors">About</a>
+          <a href="#work" className="hover:text-primary transition-colors">Work</a>
+          <a href="#tech" className="hover:text-primary transition-colors">Stack</a>
+          <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
         </div>
 
         <div className="flex items-center gap-4">
           <ThemeSwitcher />
-          <Link href="/developer">
-            <Button size="sm" className="rounded-full text-label-caps hidden sm:flex">
-              Dashboard <ArrowRight className="ml-2 w-3 h-3" />
-            </Button>
-          </Link>
+          
+          {isLoggedIn ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full hover:bg-primary/10 hover:text-primary transition-colors">
+                  <LayoutDashboard className="w-5 h-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48 rounded-xl p-1 glass">
+                <Link href="/developer">
+                  <DropdownMenuItem className="cursor-pointer rounded-lg gap-2 text-label-caps">
+                    <LayoutDashboard className="w-4 h-4" />
+                    Command Center
+                  </DropdownMenuItem>
+                </Link>
+                <DropdownMenuItem className="cursor-pointer rounded-lg gap-2 text-label-caps">
+                  <User className="w-4 h-4" />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuItem className="cursor-pointer rounded-lg gap-2 text-label-caps text-red-500 hover:text-red-400 focus:text-red-400">
+                  <LogOut className="w-4 h-4" />
+                  Log Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link href="/login">
+                <Button variant="ghost" size="icon" className="rounded-full hover:bg-white/5 transition-all">
+                  <LogIn className="w-5 h-5" />
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

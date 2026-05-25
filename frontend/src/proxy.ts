@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { authMiddleware } from "./middleware/auth-middleware";
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   // authMiddleware
   const response = authMiddleware(req);
   if (response && response.status !== 200) {
@@ -13,5 +13,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/auth/login"],
+  matcher: ["/developer/:path*", "/crm/:path*", "/finance/:path*", "/investments/:path*", "/login", "/register"],
 };

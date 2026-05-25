@@ -10,9 +10,18 @@ export const TechnicalBentoGrid = ({
   children: React.ReactNode; 
   className?: string 
 }) => (
-  <div className={cn("grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-auto", className)}>
+  <motion.div 
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, margin: "-50px" }}
+    variants={{
+      visible: { transition: { staggerChildren: 0.15 } },
+      hidden: {}
+    }}
+    className={cn("grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-auto", className)}
+  >
     {children}
-  </div>
+  </motion.div>
 );
 
 export const TechnicalBentoCard = ({ 
@@ -29,9 +38,10 @@ export const TechnicalBentoCard = ({
   accent?: boolean;
 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
+    variants={{
+      hidden: { opacity: 0, y: 30 },
+      visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 20 } }
+    }}
     className={cn(
       "relative group overflow-hidden rounded-2xl border bg-card p-6 transition-all duration-300",
       "hover:border-primary/30 hover:shadow-[0_0_20px_oklch(0.82_0.22_110_/_0.05)]",

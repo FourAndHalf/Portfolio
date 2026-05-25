@@ -28,17 +28,17 @@ export const Hero = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             animate={{ opacity: 1, y: 0 }}
             className="text-display md:text-[5rem] max-w-4xl leading-[1.1]"
           >
-            Engineering <span className="text-primary italic">Digital</span> Foundations.
+            Engineering <span className="text-primary italic">Intelligent</span> Foundations.
           </motion.h1>
 
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-muted-foreground text-lg md:text-xl max-w-2xl font-light leading-relaxed"
+            className="text-muted-foreground text-lg md:text-xl max-w-3xl font-light leading-relaxed"
           >
-            Backend-focused engineer specializing in scalable architectures, 
-            high-performance logic, and transparent data systems.
+            Full-stack engineer building and deploying LLM-powered systems for enterprise clients — 
+            from agentic orchestration pipelines to RAG systems, with full observability in production.
           </motion.p>
 
           <motion.div 
@@ -57,7 +57,7 @@ export const Hero = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             ) : (
               <Link href="/register">
                 <Button size="lg" className="rounded-lg px-8 font-semibold">
-                  Get Started
+                  See My Work
                 </Button>
               </Link>
             )}

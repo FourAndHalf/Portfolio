@@ -12,6 +12,8 @@ type TerminalLine = {
   isStreaming?: boolean;
 };
 
+const AVAILABLE_COMMANDS = ["about", "stack", "work", "contact", "clear", "whoami", "ls", "exit", "help"];
+
 const Typewriter = ({ 
   content, 
   speed = 8, 
@@ -54,7 +56,7 @@ export const SystemTerminal = () => {
   const [history, setHistory] = useState<TerminalLine[]>([
     { id: "init-1", type: "output", content: "jinson_os v1.25.0-stable initialized.", isStreaming: false },
     { id: "init-2", type: "input", content: "whoami", isStreaming: false },
-    { id: "init-3", type: "output", content: "jinson_eb // principal_backend_engineer // builder_of_foundations", isStreaming: false },
+    { id: "init-3", type: "output", content: "jinson_eb // ai_systems_engineer // client_deployments // production_not_demos", isStreaming: false },
     { id: "init-4", type: "input", content: "help", isStreaming: false },
     { id: "init-5", type: "output", content: "Available commands: about, stack, work, contact, clear, whoami, ls, exit", isStreaming: false },
   ]);
@@ -77,6 +79,10 @@ export const SystemTerminal = () => {
 
   const processCommand = (cmd: string) => {
     const cleanCmd = cmd.toLowerCase().trim();
+    const parts = cleanCmd.split(/\s+/);
+    const baseCmd = parts[0];
+    const args = parts.slice(1);
+    
     const now = Date.now();
     const inputId = `in-${now}`;
     const outputId = `out-${now}`;
@@ -85,15 +91,22 @@ export const SystemTerminal = () => {
 
     let outputContent: string | React.ReactNode = "";
 
-    switch (cleanCmd) {
+    switch (baseCmd) {
       case "help":
         outputContent = "Available commands: about, stack, work, contact, clear, whoami, ls, exit";
         break;
       case "whoami":
-        outputContent = "jinson_eb // principal_backend_engineer // builder_of_foundations";
+        outputContent = "jinson_eb // ai_systems_engineer // client_deployments // production_not_demos";
         break;
       case "ls":
-        outputContent = "about.md  experience.log  stack.json  projects/  contact.txt";
+        if (args.includes("projects") || args.includes("projects/")) {
+          outputContent = "agentic-orchestrator/  rag-systems/  production-observability/  enterprise-data-forge/";
+        } else {
+          outputContent = "about.md  experience.log  stack.json  projects/  contact.txt";
+        }
+        break;
+      case "work":
+        outputContent = "PROJECTS: agentic-orchestrator, rag-systems, production-observability, enterprise-data-forge. Type 'ls projects/' for a detailed list.";
         break;
       case "about":
         outputContent = "Backend-focused engineer specializing in scalable architectures and high-performance logic. Architecting digital foundations with precision.";
@@ -130,8 +143,35 @@ export const SystemTerminal = () => {
         id: outputId, 
         type: "output", 
         content: outputContent, 
-        isStreaming: isString // Only stream strings for now
+        isStreaming: isString 
       }]);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const currentInput = input.trim();
+      if (!currentInput) {
+        // Show all commands if tab pressed on empty input
+        setHistory(prev => [...prev, 
+          { id: `tab-empty-in-${Date.now()}`, type: "input", content: "", isStreaming: false },
+          { id: `tab-empty-out-${Date.now()}`, type: "output", content: AVAILABLE_COMMANDS.join("  "), isStreaming: false }
+        ]);
+        return;
+      }
+
+      const matches = AVAILABLE_COMMANDS.filter(c => c.startsWith(currentInput));
+
+      if (matches.length === 1) {
+        setInput(matches[0]);
+      } else if (matches.length > 1) {
+        // Show possibilities
+        setHistory(prev => [...prev, 
+          { id: `tab-in-${Date.now()}`, type: "input", content: input, isStreaming: false },
+          { id: `tab-out-${Date.now()}`, type: "output", content: matches.join("  "), isStreaming: false }
+        ]);
+      }
     }
   };
 
@@ -227,7 +267,7 @@ export const SystemTerminal = () => {
                 >
                   {history.map((line) => (
                     <div key={line.id} className="flex gap-2.5 break-all">
-                      {line.type === "input" && <span className="text-primary font-bold shrink-0">$</span>}
+                      {line.type === "input" && <span className="text-primary font-bold shrink-0 mt-0.5">$</span>}
                       <div className={cn(
                         "tracking-tight",
                         line.type === "input" ? "text-foreground font-medium" : "text-foreground/80 ml-5"
@@ -249,18 +289,17 @@ export const SystemTerminal = () => {
                     <form onSubmit={handleSubmit} className="flex items-start gap-2.5">
                       <span className="text-primary font-bold shrink-0 mt-0.5">$</span>
                       <div className="flex-1 relative flex items-center min-h-[1.5rem]">
-                        {/* Hidden Input */}
                         <input
                           ref={inputRef}
                           type="text"
                           value={input}
                           onChange={(e) => setInput(e.target.value)}
+                          onKeyDown={handleKeyDown}
                           className="absolute inset-0 w-full bg-transparent border-none outline-none text-transparent p-0 m-0 font-technical text-[0.9375rem] focus:ring-0 z-10"
                           autoFocus
                           autoComplete="off"
                           spellCheck="false"
                         />
-                        {/* Visual Text + Cursor */}
                         <div className="flex items-center font-technical text-[0.9375rem] font-medium text-foreground whitespace-pre-wrap break-all pointer-events-none">
                           <span>{input}</span>
                           <div className="bg-primary w-2.5 h-[1.1em] ml-0.5 animate-[blink_1s_step-end_infinite] shrink-0" />

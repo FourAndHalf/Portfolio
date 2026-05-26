@@ -69,7 +69,9 @@ export const Hero = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             </a>
           </motion.div>
 
-          <SystemTerminal />
+          <div className="w-full min-h-[384px] flex items-center justify-center">
+            <SystemTerminal />
+          </div>
         </div>
       </div>
 

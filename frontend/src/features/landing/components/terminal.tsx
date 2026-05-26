@@ -49,7 +49,7 @@ const Typewriter = ({
 
 export const SystemTerminal = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(true); // Start minimized for the drop-down effect
   const [isMaximized, setIsMaximized] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [input, setInput] = useState("");
@@ -63,6 +63,14 @@ export const SystemTerminal = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Trigger initial expansion after a short delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsMinimized(false);
+    }, 400); 
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -153,7 +161,6 @@ export const SystemTerminal = () => {
       e.preventDefault();
       const currentInput = input.trim();
       if (!currentInput) {
-        // Show all commands if tab pressed on empty input
         setHistory(prev => [...prev, 
           { id: `tab-empty-in-${Date.now()}`, type: "input", content: "", isStreaming: false },
           { id: `tab-empty-out-${Date.now()}`, type: "output", content: AVAILABLE_COMMANDS.join("  "), isStreaming: false }
@@ -166,7 +173,6 @@ export const SystemTerminal = () => {
       if (matches.length === 1) {
         setInput(matches[0]);
       } else if (matches.length > 1) {
-        // Show possibilities
         setHistory(prev => [...prev, 
           { id: `tab-in-${Date.now()}`, type: "input", content: input, isStreaming: false },
           { id: `tab-out-${Date.now()}`, type: "output", content: matches.join("  "), isStreaming: false }
@@ -193,25 +199,22 @@ export const SystemTerminal = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          layout
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ 
             opacity: 1, 
-            y: 0,
+            scale: 1,
             width: "100%",
             maxWidth: isMaximized ? "100%" : "48rem" 
           }}
-          exit={{ opacity: 0, scale: 0.95, y: 20, height: 0, marginTop: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 20, height: 0 }}
           transition={{ 
-            duration: 0.5, 
-            type: "spring", 
-            stiffness: 120, 
-            damping: 25,
-            layout: { type: "spring", stiffness: 120, damping: 25 }
+            duration: 0.4, 
+            ease: "easeOut",
+            layout: { type: "spring", stiffness: 105, damping: 23 }
           }}
           className={cn(
-            "rounded-xl overflow-hidden border border-border bg-[oklch(0.10_0_0)] shadow-2xl mx-auto",
-            isMaximized ? "fixed inset-4 z-[60] mt-0" : "relative mt-12"
+            "rounded-xl overflow-hidden border border-border bg-[oklch(0.10_0_0)] shadow-2xl mx-auto relative",
+            isMaximized && "fixed inset-4 z-[60] mt-0"
           )}
           onClick={handleTerminalClick}
         >
@@ -246,7 +249,7 @@ export const SystemTerminal = () => {
           </div>
 
           {/* Terminal Content */}
-          <AnimatePresence initial={false}>
+          <AnimatePresence>
             {!isMinimized && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
@@ -257,7 +260,7 @@ export const SystemTerminal = () => {
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ 
                   height: { type: "spring", stiffness: 105, damping: 23 },
-                  opacity: { duration: 0.2, ease: "linear" }
+                  opacity: { duration: 0.3, delay: 0.1 }
                 }}
                 className="overflow-hidden flex flex-col"
               >

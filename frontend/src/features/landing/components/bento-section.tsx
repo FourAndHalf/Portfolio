@@ -1,6 +1,19 @@
 "use client";
 
-import { Cpu, Layers, Shield, Code2, Database, Cloud, Zap, Monitor, Terminal } from "lucide-react";
+import { 
+  Cpu, 
+  Layers, 
+  Shield, 
+  Code2, 
+  Database, 
+  Cloud, 
+  Zap, 
+  Monitor, 
+  Terminal,
+  Eye,
+  ShieldCheck,
+  Rocket 
+} from "lucide-react";
 import { TechnicalBentoGrid, TechnicalBentoCard } from "./bento";
 import { ExperienceModule } from "./experience";
 import { CommitsModule } from "./commits";
@@ -12,22 +25,50 @@ export const BentoSection = () => {
       <TechnicalBentoGrid>
         {/* Main Feature - 8 columns, 2 rows */}
         <TechnicalBentoCard className="md:col-span-8 md:row-span-2" title="Architectural Philosophy" id="CORE">
-          <div className="mt-8 space-y-6">
-            <p className="text-headline-lg leading-relaxed">
-              I build systems that prioritize <span className="text-primary font-semibold">integrity</span> and <span className="text-primary font-semibold">transparency</span>. 
-              Every line of code is a structural component of a larger, resilient machine.
+          <div className="mt-6">
+            <p className="text-muted-foreground text-sm font-technical mb-8">
+              3 principles, each tied to a real system built for production:
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-secondary/50 border border-border">
-                <Cpu className="w-6 h-6 mb-2 text-primary" />
-                <h4 className="font-semibold mb-1">Performance</h4>
-                <p className="text-code-md text-muted-foreground">Optimized execution paths and resource management.</p>
-              </div>
-              <div className="p-4 rounded-xl bg-secondary/50 border border-border">
-                <Layers className="w-6 h-6 mb-2 text-primary" />
-                <h4 className="font-semibold mb-1">Scalability</h4>
-                <p className="text-code-md text-muted-foreground">Modular designs that grow with your user base.</p>
-              </div>
+            
+            <div className="space-y-0 border-t border-border/50">
+              {[
+                {
+                  principle: "Observe before you optimise",
+                  action: "Instrumented LLM traces with Arize Phoenix on the claims pipeline — caught classification failure modes before they hit clients",
+                  icon: Eye
+                },
+                {
+                  principle: "Fault tolerance by default",
+                  action: "Dead-letter queues + idempotent workers in RabbitMQ — zero message loss under partial system failures",
+                  icon: ShieldCheck
+                },
+                {
+                  principle: "Ship to clients, not staging",
+                  action: "3 of 4 delivery phases live in stakeholder environments — business logic refined iteratively through real usage",
+                  icon: Rocket
+                }
+              ].map((item, idx) => (
+                <div key={idx} className="grid grid-cols-1 md:grid-cols-12 py-6 border-b border-border/50 gap-4 group hover:bg-primary/[0.03] transition-all duration-500 -mx-6 px-6 cursor-default">
+                  <div className="md:col-span-4 flex items-start gap-4">
+                    <div className="mt-1 p-2 rounded-lg bg-secondary/50 border border-border group-hover:border-primary/50 group-hover:text-primary transition-all duration-500 shadow-[0_0_15px_rgba(0,0,0,0.1)] group-hover:shadow-[0_0_20px_oklch(0.82_0.22_110_/_0.1)]">
+                      <item.icon className="w-5 h-5 transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div>
+                      <span className="text-primary font-semibold text-sm uppercase tracking-wider block mb-1 transition-transform duration-500 group-hover:translate-x-1">
+                        {item.principle}
+                      </span>
+                      <span className="text-[10px] text-muted-foreground font-technical uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500">
+                        verified_production_metric
+                      </span>
+                    </div>
+                  </div>
+                  <div className="md:col-span-8">
+                    <p className="text-code-md text-foreground/70 leading-relaxed transition-colors duration-500 group-hover:text-foreground">
+                      {item.action}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </TechnicalBentoCard>

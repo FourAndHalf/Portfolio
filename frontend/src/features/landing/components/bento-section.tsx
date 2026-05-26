@@ -27,24 +27,24 @@ export const BentoSection = () => {
         <TechnicalBentoCard className="md:col-span-8 md:row-span-2" title="Architectural Philosophy" id="CORE">
           <div className="mt-6">
             <p className="text-muted-foreground text-sm font-technical mb-8">
-              3 principles, each tied to a real system built for production:
+              3 principles, got from reading pragmmatic programmer:
             </p>
             
             <div className="space-y-0 border-t border-border/50">
               {[
                 {
-                  principle: "Observe before you optimise",
-                  action: "Instrumented LLM traces with Arize Phoenix on the claims pipeline — caught classification failure modes before they hit clients",
+                  principle: "Observe - Infer - optimise",
+                  action: "Instrumented the design and rollout of a custom tracing platform using Arize Phoenix and OpenObserve for the claims pipeline, enabling proactive optimization and debugging of API and LLM workflows across projects without impacting client-facing operations.",
                   icon: Eye
                 },
                 {
                   principle: "Fault tolerance by default",
-                  action: "Dead-letter queues + idempotent workers in RabbitMQ — zero message loss under partial system failures",
+                  action: "Implemented defensive programming philosophy, to make sure the system recover from failure on its own, improving overall reliablity and resilience of the system",
                   icon: ShieldCheck
                 },
                 {
-                  principle: "Ship to clients, not staging",
-                  action: "3 of 4 delivery phases live in stakeholder environments — business logic refined iteratively through real usage",
+                  principle: "Delivering products at scale",
+                  action: "End to end ownership in delivering 2 projects and further developed 3 products and 8 modules that were part of wider modules in systems to the customer side that impacted them gaining record revenue of 3.44B in latest financial year",
                   icon: Rocket
                 }
               ].map((item, idx) => (
@@ -56,9 +56,6 @@ export const BentoSection = () => {
                     <div>
                       <span className="text-primary font-semibold text-sm uppercase tracking-wider block mb-1 transition-transform duration-500 group-hover:translate-x-1">
                         {item.principle}
-                      </span>
-                      <span className="text-[10px] text-muted-foreground font-technical uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500">
-                        verified_production_metric
                       </span>
                     </div>
                   </div>
